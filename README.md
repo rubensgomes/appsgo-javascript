@@ -11,7 +11,7 @@ http://appsgo.mobi/
 ## Instalation
 
 This file provides the configuration steps to configure the development
-environment on Windows DOS.  
+environment on Windows DOS.
 
 **NOTE**:  As of 11/20/2014 I had issues configuring Node.js modules in cygwin.
 
@@ -25,18 +25,18 @@ http://nodejs.org/download/
 
 * Install Node.js in the c:\nodejs\ folder.
 
-* Open a Windows shell command prompt, and run the following command to insure 
+* Open a Windows shell command prompt, and run the following command to insure
 proper running of "node" and "npm".
 
-    node -v 
-    npm -v 
+    node -v
+    npm -v
 
-* Then ensure that npm is up-to-date by running the following command from the  
+* Then ensure that npm is up-to-date by running the following command from the
 Windows shell command prompt:
 
     npm install -g npm@2.1.9
 
-* Open a Windows shell command prompt, and run the following commands to install 
+* Open a Windows shell command prompt, and run the following commands to install
 Node.js modules required during development
 
     npm install -g bower
@@ -45,11 +45,11 @@ Node.js modules required during development
 
 * Checkout the "appsgo" project from my GitHub:
 
-https://github.com/rubensgomes/appsgo
+https://github.com/rubensgomes/AppsGo.mobi
 
-* Place the checked out files in "C:\projects\appsgo"
+* Place the checked out foler in "C:\projects\"
 
-* Open a Windows shell command prompt and go to the "C:\projects\appsgo"
+* Open a Windows shell command prompt and go to the "C:\projects\AppsGo.mobi"
 
 * Then run the following commands
 
@@ -59,17 +59,17 @@ https://github.com/rubensgomes/appsgo
 
 ## Build, Run and Deploy
 
-Prior to running builds you must have your development environment properly 
+Prior to running builds you must have your development environment properly
 configured according to above instructions
 
 In order to run a local build follow these steps:
 
 * It is assumed the project is checked out to "C:\projects\appsgo"
 
-* It is also assumed that you have previously run the "npm install" and 
+* It is also assumed that you have previously run the "npm install" and
 "bower install" commands as noted in the DEVINSTALL file.
 
-* Open a Windows shell command prompt and go to the following path: 
+* Open a Windows shell command prompt and go to the following path:
 "C:\project\appsgo"
 
 * Then run the following command to do build:
