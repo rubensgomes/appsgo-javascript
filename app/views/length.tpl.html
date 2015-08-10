@@ -1,0 +1,45 @@
+<form>
+
+  <div class="center-wrapper">
+
+    <input id="lengthValueId"
+           class="vert-margin-large"
+           style="text-align: center;"
+           type="number"
+           required
+           placeholder="Type a number..."
+           value=""
+           ng-model="value"
+           ng-blur="doneInput(value)"
+           ng-keypress="($event.which === 13) ? convertLength(value, fromUnit, toUnit) : 0" />
+
+    <fieldset id="selectLengthUnitFieldset" class="ui-grid-a">
+      <div class="ui-block-a">
+        <label for="fromLengthUnit" class="select">From Unit:</label>
+        <select ng-model="fromLengthUnit"
+                ng-options="u.label for u in lengthUnits track by u.value"
+                data-mini="true" data-inline="true"></select>
+      </div>
+      <div class="ui-block-b">
+        <label for="toLengthUnit" class="select">To Unit:</label>
+        <select ng-model="toLengthUnit"
+                ng-options="u.label for u in lengthUnits track by u.value"
+                data-mini="true" data-inline="true"></select>
+      </div>
+    </fieldset>
+
+    <fieldset id="buttonLengthUnitFieldset"
+              style="margin-top: 0.5em;" class="ui-grid-solo ui-responsive">
+      <div class="ui-block-a">
+        <a href="" data-role="button" data-theme="c"
+           class="ui-shadow ui-btn ui-corner-all"
+           ng-click="convertLength(value, fromLengthUnit.value, toLengthUnit.value)">Convert</a>
+      </div>
+    </fieldset>
+
+
+    <ng-include src="'views/output.tpl.html'"  />
+
+  </div>
+
+</form>

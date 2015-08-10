@@ -1,0 +1,9 @@
+<div class="output-box">
+  <div class="error"
+       ng-if="error && 0 != error.length">{{status}} - {{error}}</div>
+ <div class="success"
+       ng-bind-html="result"
+       ng-elif="result && 0 != result.length"></div>
+ <div class="success"
+         ng-if="result && 0 != result.length">{{date | date:'MMM-dd-yyyy HH:mm:ss'}}</div>
+</div>

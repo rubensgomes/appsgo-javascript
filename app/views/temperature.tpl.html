@@ -1,0 +1,33 @@
+<form>
+
+  <div class="center-wrapper">
+
+    <input id="tempValueId"
+           class="vert-margin-large"
+           style="text-align: center;"
+           type="number"
+           required
+           placeholder="Type a number..."
+           value=""
+           ng-model="value"
+           ng-blur="doneInput(value)"
+           ng-keypress="($event.which === 13) ? cToF(value) : 0" />
+
+    <fieldset class="ui-grid-a">
+      <div class="ui-block-a">
+        <a href="" data-role="button" data-theme="c"
+           class="ui-shadow ui-btn ui-corner-all"
+           ng-click="cToF(value)">&deg;C to &deg;F</a>
+      </div>
+      <div class="ui-block-b">
+        <a href="" data-role="button" data-theme="b"
+           class="ui-shadow ui-btn ui-corner-all"
+           ng-click="fToC(value)">&deg;F to &deg;C</a>
+      </div>
+    </fieldset>
+
+    <ng-include src="'views/output.tpl.html'"  />
+
+  </div>
+
+</form>

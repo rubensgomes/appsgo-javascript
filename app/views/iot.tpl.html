@@ -1,0 +1,39 @@
+<div class="center-wrapper">
+
+  <img src="images/wiring.png" alt="Temperature Sensor" />
+
+
+  <div class="vert-margin-large">
+    <select ng-model="duration"
+            ng-options="d.label for d in durations track by d.value"
+            data-mini="true"
+            data-inline="true"
+            ng-change="getTemperatureData(duration.value)">
+    </select>
+  </div>
+
+  <p style="width: 300px; text-align: justify;">
+  Temperatures in Rubens' home living room in Chapel Hill, NC
+  collected from the above Raspberry Temperature Sensor.
+  </p>
+
+
+  <div class="output-box">
+    <table>
+      <tbody>
+        <tr ng-repeat="data in sensorData">
+          <td>[{{$index + 1}}]</td>
+          <td style="text-align:right;">{{data.value}}</td>
+          <td>{{data.unit | asDegreeSymbol}}</td>
+          <td>{{data.utc | asDate | date:'hh:mm a MM/dd/yyyy'}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div> <!-- center-wrapper -->
+
+<br />
+<p><span us-spinner spinner-key="spinner-1"></span></p>
+
+

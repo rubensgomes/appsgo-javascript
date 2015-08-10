@@ -1,0 +1,43 @@
+/* $Id: main.css 7610 2015-02-27 23:53:05Z rubens $ */
+.output-box {
+  margin: 2em auto !important;
+}
+
+.success,
+.error {
+  font: bold;
+}
+
+.error {
+  padding: 0.2em;
+  background-color: #FFD6DF;
+  color: red;
+}
+
+.app-content-loading {
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.loading-spinner {
+  position: absolute;
+  font-size: 50px;
+  left: 50%;
+  top: 50%;
+  margin-left: -25px;
+  margin-top: -25px;
+}
+
+.center-wrapper {
+  text-align: center;
+}
+
+.center-wrapper * {
+  margin: 0 auto;
+}
+
+.vert-margin-large {
+  margin: 2em auto;
+}
