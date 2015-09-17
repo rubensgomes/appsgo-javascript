@@ -1,21 +1,20 @@
-<form>
 <div class="center-wrapper">
 
   <div class="vert-margin-large">
-    <label for="currency" class="select">US Dollar To:</label>
-    <select ng-model="currency"
-            ng-options="c.label for c in currencies track by c.value"
-            data-mini="true"
-            data-inline="true"
-            ng-keypress="($event.which === 13) ? toCurrency(currency.value) : 0"
-            ng-change="toCurrency(currency.value)">
+    <label for="currency" class="select">US Dollar To:</label> <select
+             data-ng-model="currency.currency"
+             data-ng-options="c.label for c in currency.currencies track by c.value"
+             data-mini="true" 
+             data-inline="true"
+             data-ng-keypress="($event.which === 13) ? currency.toCurrency(currency.currency.value) : 0"
+             data-ng-change="currency.toCurrency(currency.currency.value)">
     </select>
   </div>
 
-  <ng-include src="'views/output.tpl.html'"  />
+  <div data-ng-include="'views/output.tpl.html'"></div>
 
-</div> <!-- center-wrapper -->
-</form>
+</div>
 
 <br />
-<p><span us-spinner spinner-key="spinner-1"></span></p>
+
+<p><span data-us-spinner data-spinner-key="spinner-1"></span></p>

@@ -3,43 +3,44 @@
   <div class="center-wrapper">
 
     <input id="weightValueId"
-           class="vert-margin-large"
-           style="text-align: center;"
-           type="number"
-           required
-           placeholder="Type a number..."
-           value=""
-           ng-model="value"
-           ng-blur="doneInput(value)"
-           ng-keypress="($event.which === 13) ? convertMass(value, fromMassUnit, toMassUnit) : 0" />
+              class="vert-margin-large"
+              style="text-align: center;"
+              type="number"
+              required
+              placeholder="Type a number..."
+              value=""
+              data-ng-model="value"
+              data-ng-blur="units.doneInput(value)"
+              data-ng-keypress="($event.which === 13) ? 
+                units.convertMass(value, units.fromMassUnit, units.toMassUnit) : 0" />
 
     <fieldset id="selectWeightUnitFieldset" class="ui-grid-a">
       <div class="ui-block-a">
         <label for="fromMassUnit" class="select">From Unit:</label>
-        <select ng-model="fromMassUnit"
-                ng-options="u.label for u in massUnits track by u.value"
-                data-mini="true" data-inline="true"></select>
+        <select data-ng-model="units.fromMassUnit"
+                   data-ng-options="u.label for u in units.massUnits track by u.value"
+                   data-mini="true" data-inline="true"></select>
       </div>
       <div class="ui-block-b">
         <label for="toMassUnit" class="select">To Unit:</label>
-        <select ng-model="toMassUnit"
-                ng-options="u.label for u in massUnits track by u.value"
-                data-mini="true" data-inline="true"></select>
+        <select data-ng-model="units.toMassUnit"
+                   data-ng-options="u.label for u in units.massUnits track by u.value"
+                   data-mini="true" data-inline="true"></select>
       </div>
     </fieldset>
 
     <fieldset id="buttonWeightUnitFieldset"
-              style="margin-top: 0.5em;" class="ui-grid-solo ui-responsive">
+                 style="margin-top: 0.5em;" class="ui-grid-solo ui-responsive">
       <div class="ui-block-a">
         <a href="" data-role="button" data-theme="c"
-           class="ui-shadow ui-btn ui-corner-all"
-           ng-click="convertMass(value, fromMassUnit.value, toMassUnit.value)">Convert</a>
+             class="ui-shadow ui-btn ui-corner-all"
+             data-ng-click="units.convertMass(value, 
+                                                             units.fromMassUnit.value, 
+                                                             units.toMassUnit.value)">Convert</a>
       </div>
     </fieldset>
 
-
-    <ng-include src="'views/output.tpl.html'"  />
+    <div data-ng-include="'views/output.tpl.html'"></div>
 
   </div>
-
 </form>

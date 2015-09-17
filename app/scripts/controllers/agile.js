@@ -4,22 +4,24 @@
  * @file Agile controller file
  *
  * @author Rubens Gomes [rubens.s.gomes@gmail.com]
- * @version $Id: iot.js 7767 2015-03-17 13:14:41Z rubens $
+ * @version $Id: agile.js 424 2015-09-17 04:01:02Z rubens_gomes $
  */
 
-angular.module('rgApps.agile')
+angular.module('rgapps.agile')
 
 
 /**
  * @constructs AgileCtrl controller
  */
 .controller('AgileCtrl', [
+  '$rootScope',
   '$scope',
   '$http',
   'utilitySvc',
   'usSpinnerService',
-  function($scope, $http, utilitySvc, usSpinnerService) {
+  function($rootScope, $scope, $http, utilitySvc, usSpinnerService) {
 
+    $rootScope.title = 'Agile'; // the agile page title
 
     /**
      * A place holder for links and corresponding date ranges found while

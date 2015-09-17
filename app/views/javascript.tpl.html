@@ -1,0 +1,171 @@
+<h4>
+  <a href="" data-ng-click="display = !display">
+  Is JavaScript a pass-by-reference or pass-by-value language?
+  </a>
+</h4>
+
+<div class="animate-show" data-ng-show="display">
+
+  <p>
+    The answer depends on the type of variable being passed.<br />
+    <br />
+    Primitive typed variables (e.g. Boolean, Number, String) are stored
+    in the stack. Therefore, when passing these types of variables to
+    functions a copy of that <strong>variable value</strong> is made into
+    the function argument which has its own stack. In this case the answer is
+    passed-by-value.<br />
+    <br />
+    Object and array typed variables are stored in the heap. Therefore, when
+    passing these types of variables to functions a copy of the
+    <strong>the object or array memory address in the heap</strong> is made
+    into the function argument. In this case the answer is passed-by-reference. <br />
+    <br />
+    The code samples below can help you understand these concepts better.
+  </p>
+
+  <pre>
+
+  function num(n) {
+      // What is n here? <span style="font-style: italic;">{{js.answerN}}</span>
+      n = 2;
+      // What is n now? <span style="font-style: italic;">{{js.answerNAfter}}</span>
+  }
+
+  var x = 1;
+  num(x);
+  // What is x ?
+  </pre>
+  <p style="font-style: italic;">{{js.answer1}}</p>
+
+  <div class="ui-grid-a">
+    <div class="ui-block-a">
+      <a href="" data-role="button" data-theme="c"
+           class="ui-shadow ui-btn ui-corner-all" 
+           data-ng-click="js.whatIsX1()">Answer</a>
+    </div>
+    <div class="ui-block-b">
+      <a href="" data-role="button" data-theme="b"
+           class="ui-shadow ui-btn ui-corner-all" 
+           data-ng-click="js.clearAnswer1()">Clear</a>
+    </div>
+  </div>
+
+  <pre>
+
+  function str(s) {
+      s = "vasco";
+  }
+
+  var x = "hello";
+  str(x);
+  // What is x ?
+  </pre>
+  <p style="font-style: italic;">{{js.answer2}}</p>
+
+  <div class="ui-grid-a">
+    <div class="ui-block-a">
+      <a href="" data-role="button" data-theme="c"
+           class="ui-shadow ui-btn ui-corner-all" 
+           data-ng-click="js.whatIsX2()">Answer</a>
+    </div>
+    <div class="ui-block-b">
+      <a href="" data-role="button" data-theme="b"
+           class="ui-shadow ui-btn ui-corner-all" 
+           data-ng-click="js.clearAnswer2()">Clear</a>
+    </div>
+  </div>
+
+  <pre>
+
+  function foo(bar) {
+      bar = null;
+  }
+
+  var x = [];
+  foo(x);
+  // What is x ?
+  </pre>
+  <p style="font-style: italic;">{{js.answer3}}</p>
+
+  <div class="ui-grid-a">
+    <div class="ui-block-a">
+      <a href="" data-role="button" data-theme="c"
+           class="ui-shadow ui-btn ui-corner-all" 
+           data-ng-click="js.whatIsX3()">Answer</a>
+    </div>
+    <div class="ui-block-b">
+      <a href="" data-role="button" data-theme="b"
+           class="ui-shadow ui-btn ui-corner-all" 
+           data-ng-click="js.clearAnswer3()">Clear</a>
+    </div>
+  </div>
+
+
+  <pre>
+
+  function bar(foo) {
+      foo[0] = "test" ;
+  }
+
+  var x = [];
+  bar(x);
+  // What is x ?
+  </pre>
+  <p style="font-style: italic;">{{js.answer4}}</p>
+
+  <div class="ui-grid-a">
+    <div class="ui-block-a">
+      <a href="" data-role="button" data-theme="c"
+           class="ui-shadow ui-btn ui-corner-all" 
+           data-ng-click="js.whatIsX4()">Answer</a>
+    </div>
+    <div class="ui-block-b">
+      <a href="" data-role="button" data-theme="b"
+           class="ui-shadow ui-btn ui-corner-all" 
+           data-ng-click="js.clearAnswer4()">Clear</a>
+    </div>
+  </div>
+
+  <pre>
+
+  function HelloWorld(a, b) {
+    // constructor for HelloWorld object
+    this.foo = a;
+    this.bar = b;
+  }
+
+  function hello(anObj) {
+      if(anObj instanceof HelloWorld) {
+          anObj.foo = "Vasco";
+          anObj.bar = " da Gama";
+      }
+  }
+
+  var x = new HelloWorld("hello", "world");
+  hello(x);
+  // What is x ?
+  </pre>
+  <p style="font-style: italic;">{{js.answer5}}</p>
+
+  <div class="ui-grid-a">
+    <div class="ui-block-a">
+      <a href="" data-role="button" data-theme="c"
+           class="ui-shadow ui-btn ui-corner-all" 
+           data-ng-click="js.whatIsX5()">Answer</a>
+    </div>
+    <div class="ui-block-b">
+      <a href="" data-role="button" data-theme="b"
+           class="ui-shadow ui-btn ui-corner-all" 
+           data-ng-click="js.clearAnswer5()">Clear</a>
+    </div>
+  </div>
+
+  <div class="ui-grid-solo ui-responsive">
+    <div class="ui-block-a">
+      <a href="" data-role="button" data-theme="d"
+          class="ui-shadow ui-btn ui-corner-all" 
+          data-ng-click="js.clearAnswers()">Clear All</a>
+    </div>
+  </div>
+
+</div>
