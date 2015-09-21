@@ -3,7 +3,7 @@
      * @file Currency controller file
      *
      * @author Rubens Gomes [rubens.s.gomes@gmail.com]
-     * @version $Id: currency-ctrl.js 424 2015-09-17 04:01:02Z rubens_gomes $
+     * @version $Id: currency-ctrl.js 430 2015-09-21 19:37:27Z rubens_gomes $
      */
     'use strict';
 
@@ -91,7 +91,7 @@
                             $scope.error = 'null response calling [' + url + ']';
                         } else {
                           $log.debug('REST call succeeded.');
-                          $scope.result = '$1.00 U.S. Dollar = ' + 
+                          $scope.result = 'U.S. $1.00 = ' + 
                               data.rates['' + value] + ' ' + value;
                           $scope.date = new Date(data.timestamp * 1000);
                         }
@@ -105,7 +105,7 @@
                 $log.error('REST call failed.');
                 $scope.error = err.message;
             } finally {
-                usSpinnerService.spin('spinner-1');
+                usSpinnerService.stop('spinner-1');
             } 
         };
 

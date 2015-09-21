@@ -4,7 +4,7 @@
    * dependencies.
    *
    * @author Rubens Gomes [rubens.s.gomes@gmail.com]
-   * @version $Id: app.js 424 2015-09-17 04:01:02Z rubens_gomes $
+   * @version $Id: app.js 428 2015-09-21 18:47:38Z rubens_gomes $
    */
   'use strict';
 

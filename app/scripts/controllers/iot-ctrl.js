@@ -3,7 +3,7 @@
      * @file IoT controller file.
      * 
      * @author Rubens Gomes [rubens.s.gomes@gmail.com].
-     * @version $Id: iot-ctrl.js 424 2015-09-17 04:01:02Z rubens_gomes $
+     * @version $Id: iot-ctrl.js 428 2015-09-21 18:47:38Z rubens_gomes $
      */
     'use strict';
 
