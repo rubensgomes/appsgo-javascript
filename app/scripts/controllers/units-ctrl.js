@@ -3,7 +3,7 @@
      * @file UnitsController file.
      *
      * @author Rubens Gomes [rubens.s.gomes@gmail.com].
-     * @version $Id: units-ctrl.js 428 2015-09-21 18:47:38Z rubens_gomes $
+     * @version $Id: units-ctrl.js 432 2015-09-24 09:17:27Z rubens_gomes $
      */
     'use strict';
 
@@ -86,7 +86,7 @@
 
         };
 
-        // ------ >>> Weight (sames as Mass) <<< -------
+        // ------ >>> Mass <<< -------
 
         vm.massUnits = [ {
             label : 'ounce',
@@ -111,7 +111,7 @@
 
             try {
                 utilityService.isNumber(value);
-                var url = CONST.WEIGHT_UNIT_REST_URL + toUnit +
+                var url = CONST.MASS_UNIT_REST_URL + toUnit +
                     '?from_unit=' + fromUnit + '&from_value=' + value; 
                 $log.debug('Calling REST URL [' + url + ']');
                 $http

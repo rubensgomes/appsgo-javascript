@@ -5,7 +5,7 @@
      * template.
      *
      * @author Rubens Gomes [rubens.s.gomes@gmail.com].
-     * @version $Id: app-routes.js 428 2015-09-21 18:47:38Z rubens_gomes $
+     * @version $Id: app-routes.js 432 2015-09-24 09:17:27Z rubens_gomes $
      */
     'use strict';
 
@@ -36,8 +36,8 @@
                 templateUrl : 'views/temperature.tpl.html',
                 controller : 'UnitsController as units'
             })
-            .when('/weight', {
-                templateUrl : 'views/weight.tpl.html',
+            .when('/mass', {
+                templateUrl : 'views/mass.tpl.html',
                 controller : 'UnitsController as units'
             })
             .when('/currency', {

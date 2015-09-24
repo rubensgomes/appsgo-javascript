@@ -2,7 +2,7 @@
 
   <div class="center-wrapper">
 
-    <input id="weightValueId"
+    <input id="massValueId"
               class="vert-margin-large"
               style="text-align: center;"
               type="number"
@@ -14,7 +14,7 @@
               data-ng-keypress="($event.which === 13) ? 
                 units.convertMass(value, units.fromMassUnit, units.toMassUnit) : 0" />
 
-    <fieldset id="selectWeightUnitFieldset" class="ui-grid-a">
+    <fieldset id="selectMassUnitFieldset" class="ui-grid-a">
       <div class="ui-block-a">
         <label for="fromMassUnit" class="select">From Unit:</label>
         <select data-ng-model="units.fromMassUnit"
@@ -29,7 +29,7 @@
       </div>
     </fieldset>
 
-    <fieldset id="buttonWeightUnitFieldset"
+    <fieldset id="buttonMassUnitFieldset"
                  style="margin-top: 0.5em;" class="ui-grid-solo ui-responsive">
       <div class="ui-block-a">
         <a href="" data-role="button" data-theme="c"
