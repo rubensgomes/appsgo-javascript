@@ -1,17 +1,13 @@
 {
   "name": "appsgo",
-  "version": "0.1.0",
+  "version": "2015.9.dev2",
   "description": "appsgo contains mobile web apps developed using AngularJS",
   "license": "ISC",
   "main": "Gruntfile.js",
-  "author": {
-    "name": "Rubens S. Gomes",
-    "email": "rubens.s.gomes@gmail.com",
-    "url": "http://www.rubens-gomes.com/"
-  },
+  "author": "Rubens S. Gomes <rubens.s.gomes@gmail.com> (http://www.rubens-gomes.com/)",
   "repository": {
     "type": "svn",
-    "url": "https://github.com/rubensgomes/appsgo"
+    "url": "git+https://github.com/rubensgomes/appsgo.git"
   },
   "directories": {
     "app": "app",
@@ -43,6 +39,7 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-filerev": "^2.1.2",
     "grunt-google-cdn": "^0.4.3",
+    "grunt-jsdoc": "^0.6.8",
     "grunt-karma": "^0.9.0",
     "grunt-newer": "^0.8.0",
     "grunt-ng-annotate": "^0.7.0",
@@ -58,5 +55,9 @@
     "karma-phantomjs-launcher": "^0.1.4",
     "load-grunt-tasks": "^1.0.0",
     "time-grunt": "^1.0.0"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/rubensgomes/appsgo/issues"
+  },
+  "homepage": "https://github.com/rubensgomes/appsgo#readme"
 }

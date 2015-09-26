@@ -173,9 +173,9 @@ module.exports = function(grunt)
       {
         src :
           [ '<%= config.dist %>/scripts/{,*/}*.js',
-              '<%= config.dist %>/styles/{,*/}*.css',
-              '<%= config.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-              '<%= config.dist %>/styles/fonts/*' ]
+            '<%= config.dist %>/styles/{,*/}*.css',
+            '<%= config.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+            '<%= config.dist %>/styles/fonts/*' ]
       }
     },
 
@@ -220,6 +220,19 @@ module.exports = function(grunt)
       }
     },
 
+    // grunt-jsdoc: generate javascript jsdoc
+    jsdoc : 
+    {
+      dist : 
+      {
+        src: ['<%= config.app %>/scripts/*.js'],
+        options: 
+        {
+            destination: '<%= config.dist %>/doc'
+        }
+      }
+    },
+
     // grunt-contrib-jshint: Make sure code styles are up to par and there are
     // no obvious mistakes
     jshint :
@@ -234,15 +247,7 @@ module.exports = function(grunt)
       all :
       {
         src :
-          [ 'Gruntfile.js',
-            '<%= config.app %>/scripts/app.js',
-            '<%= config.app %>/scripts/controllers/currency.js',
-            '<%= config.app %>/scripts/controllers/iot.js',
-            '<%= config.app %>/scripts/controllers/main.js',
-            '<%= config.app %>/scripts/controllers/unit.js',
-            '<%= config.app %>/scripts/services/utility.js'
-//            '<%= config.app %>/scripts/highcharts-ng.js'
-            ]
+          [ 'Gruntfile.js', '<%= config.app %>/scripts/{,*/}*.js']
       },
 
       test :
@@ -347,7 +352,7 @@ module.exports = function(grunt)
     },
 
     // grunt-svn-export: SVN export the app sources to dist/src
-    svn_export:
+    svnexport:
     {
       dev:
       {
@@ -492,7 +497,7 @@ module.exports = function(grunt)
     [ 'default', 'sshexec:clean', 'sftp:copy' ]);
 
 //  grunt.registerTask('deploy',
-//    [ 'default', 'sshexec:clean', 'svn_export:dev', 'sftp:copy' ]);
+//    [ 'default', 'sshexec:clean', 'svnexport:dev', 'sftp:copy' ]);
 
   grunt.registerTask('serve', 'Compile then start a connect web server',
     function(target)

@@ -1,11 +1,11 @@
 {
   "name": "appsgo",
   "private": "true",
-  "homepage": "http://netapps.mobi",
+  "homepage": "http://appsgo.mobi",
   "authors": [
     "Rubens Gomes <rubens.s.gomes@gmail.com>"
   ],
-  "version": "0.1.0",
+  "version": "2015.9.dev2",
   "keywords": [
     "angularjs",
     "mobile-ui"
