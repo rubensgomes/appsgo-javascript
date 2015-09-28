@@ -1,8 +1,9 @@
 # appsgo.mobi
 
 The appsgo.mobi is a mobile web application that provides unit converstion
-utilities (length, temperature, mass) and currency rates.  The web
-application was developed as a playground for Rubens to learn more about the AngularJS JavaScript framework.
+utilities (length, temperature, mass) and currency rates.  This mobile web
+application was developed as a playground for 
+[Rubens](http://www.rubens-gomes.com) to learn more about the AngularJS JavaScript framework.
 
 The mobile web app is currently deployed in the following site:
 
