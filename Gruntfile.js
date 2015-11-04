@@ -29,29 +29,19 @@ module.exports = function(grunt)
     {
       options :
       {
-        browsers :
-          [ 'last 1 version' ]
+        browsers : [ 'last 1 version' ]
       },
       dist :
       {
         files :
           [
-          {
-            expand : true,
-            cwd : '.tmp/styles/',
-            src : '{,*/}*.css',
-            dest : '.tmp/styles/'
-          } ]
-      }
-    },
-
-    // grunt-google-cdn: Replace Google CDN references
-    cdnify :
-    {
-      dist :
-      {
-        html :
-          [ '<%= config.dist %>/*.html' ]
+           {
+              expand : true,
+              cwd : '.tmp/styles/',
+              src : '{,*/}*.css',
+              dest : '.tmp/styles/'
+            }
+          ]
       }
     },
 
@@ -66,12 +56,9 @@ module.exports = function(grunt)
     // process
     concurrent :
     {
-      server :
-        [ 'copy:styles' ],
-      test :
-        [ 'copy:styles' ],
-      dist :
-        [ 'copy:styles', 'imagemin', 'svgmin' ]
+      server : [ 'copy:styles' ],
+      test : [ 'copy:styles' ],
+      dist : [ 'copy:styles', 'imagemin', 'svgmin' ]
     },
 
     // grunt-contrib-connect: The actual grunt server settings
@@ -91,11 +78,11 @@ module.exports = function(grunt)
           open : true,
           middleware : function(connect)
           {
-            return [connect.static('.tmp'),
-               connect().use('/bower_components',
-               connect.static('./bower_components')),
-               connect.static(properties.app)
-              ];
+            return 
+            [
+              connect.static('.tmp'),
+              connect.static(properties.app)
+            ];
           }
         }
       },
@@ -107,10 +94,10 @@ module.exports = function(grunt)
           port : 9001,
           middleware : function(connect)
           {
-            return [connect.static('.tmp'),
-             connect().use('/bower_components',
-             connect.static('./bower_components')),
-             connect.static(properties.app)
+            return 
+            [
+               connect.static('.tmp'),
+               connect.static(properties.app)
             ];
           }
         }
@@ -133,29 +120,28 @@ module.exports = function(grunt)
       {
         files :
           [
-              {
-                expand : true,
-                dot : true,
-                cwd : '<%= config.app %>',
-                dest : '<%= config.dist %>',
-                src :
-                  [ '*.{ico,png,txt}', '.htaccess', '*.html',
-                      'views/{,*/}*.html', 'images/{,*/}*.{webp}', 'fonts/*',
-                      'themes/*']
-              },
-              {
-                expand : true,
-                cwd : '.tmp/images',
-                dest : '<%= config.dist %>/images',
-                src :
-                  [ 'generated/*' ]
-              },
-              {
-                expand : true,
-                cwd : 'bower_components/bootstrap/dist',
-                src : 'fonts/*',
-                dest : '<%= config.dist %>'
-              } ]
+            {
+              expand : true,
+              dot : true,
+              cwd : '<%= config.app %>',
+              dest : '<%= config.dist %>',
+              src :
+                [ '*.{ico,png,txt}', 
+                  '.htaccess', 
+                  '*.html',
+                  'views/{,*/}*.html', 
+                  'images/{,*/}*.{webp}', 
+                  'fonts/*',
+                  'themes/*'
+                ]
+            },
+            {
+              expand : true,
+              cwd : '.tmp/images',
+              dest : '<%= config.dist %>/images',
+              src : [ 'generated/*' ]
+            } 
+          ]
       },
       styles :
       {
@@ -175,7 +161,8 @@ module.exports = function(grunt)
           [ '<%= config.dist %>/scripts/{,*/}*.js',
             '<%= config.dist %>/styles/{,*/}*.css',
             '<%= config.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-            '<%= config.dist %>/styles/fonts/*' ]
+            '<%= config.dist %>/styles/fonts/*' 
+          ]
       }
     },
 
@@ -414,14 +401,6 @@ module.exports = function(grunt)
     // the changed files
     watch :
     {
-      bower :
-      {
-        files :
-          [ 'bower.json' ],
-        tasks :
-          [ 'wiredep' ]
-      },
-
       js :
       {
         files :
@@ -466,29 +445,18 @@ module.exports = function(grunt)
           [ '<%= config.app %>/{,*/}*.html', '.tmp/styles/{,*/}*.css',
               '<%= config.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}' ]
       }
-    },
-
-    // grunt-wiredep: Automatically inject Bower components into the app
-    wiredep :
-    {
-      app :
-      {
-        src :
-          [ '<%= config.app %>/index.html' ],
-        ignorePath : /\.\.\//
-      }
     }
 
   });
 
   grunt.registerTask('build',
-    [ 'clean:dist', 'wiredep', 'useminPrepare', 'concurrent:dist',
-        'autoprefixer', 'concat', 'ngAnnotate', 'copy:dist', 'cdnify',
+    [ 'clean:dist', 'useminPrepare', 'concurrent:dist',
+        'autoprefixer', 'concat', 'ngAnnotate', 'copy:dist', 
         'cssmin', 'uglify', 'filerev', 'usemin', 'htmlmin' ]);
 
   grunt.registerTask('buildDev',
-    [ 'clean:dist', 'wiredep', 'autoprefixer', 'ngAnnotate',
-        'copy:dist', 'cdnify', 'filerev' ]);
+    [ 'clean:dist', 'autoprefixer', 'ngAnnotate',
+        'copy:dist', 'filerev' ]);
 
   grunt.registerTask('default',
     [ 'newer:jshint', 'test', 'build' ]);
@@ -508,7 +476,7 @@ module.exports = function(grunt)
       }
 
       grunt.task.run(
-        [ 'clean:server', 'wiredep', 'concurrent:server', 'autoprefixer',
+        [ 'clean:server', 'concurrent:server', 'autoprefixer',
             'connect:livereload', 'watch' ]);
     });
 

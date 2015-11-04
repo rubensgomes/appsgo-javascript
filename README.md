@@ -15,7 +15,7 @@ http://appsgo.mobi/
 
 http://nodejs.org/download/
 
-* Open a shell command prompt, and run the following command to insure
+* Open a shell command prompt, and run the following commands to insure
 proper running of "node" and "npm".
 
     node -v
@@ -24,7 +24,6 @@ proper running of "node" and "npm".
 * Open a shell command prompt, and run the following commands to install
 Node.js modules required during development
 
-    npm install -g bower
     npm install -g grunt
     npm install -g grunt-cli
 
@@ -32,7 +31,7 @@ Node.js modules required during development
 
 https://github.com/rubensgomes/AppsGo.mobi
 
-* Open a shell command prompt and go to the appsgo.mobi installed directory.
+* Open a shell command prompt, and go to the appsgo.mobi installed directory.
 Then run the following commands
 
     npm install load-grunt-tasks
@@ -40,7 +39,6 @@ Then run the following commands
 
     npm cache clean
     npm install
-    bower install
 
 
 ## Build, Run and Deploy
@@ -59,3 +57,15 @@ Then run the following command to do build:
 * In order to deploy to production, run the following command:
 
     grunt -d -v clean build deploy
+
+# Description of Files in the Root Folder
+
+## Gruntfile.js
+
+The Gruntfile.js is a manifest file for the grunt build and deployment tool.
+
+## package.json
+
+The package.json file is a manifest file for the npm tool.
+
+
