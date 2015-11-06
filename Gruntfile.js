@@ -78,11 +78,7 @@ module.exports = function(grunt)
           open : true,
           middleware : function(connect)
           {
-            return 
-            [
-              connect.static('.tmp'),
-              connect.static(properties.app)
-            ];
+            return [ connect.static('.tmp'), connect.static(properties.app) ];
           }
         }
       },
@@ -94,11 +90,7 @@ module.exports = function(grunt)
           port : 9001,
           middleware : function(connect)
           {
-            return 
-            [
-               connect.static('.tmp'),
-               connect.static(properties.app)
-            ];
+            return  [ connect.static('.tmp'), connect.static(properties.app) ];
           }
         }
       },
@@ -442,8 +434,10 @@ module.exports = function(grunt)
           livereload : '<%= connect.options.livereload %>'
         },
         files :
-          [ '<%= config.app %>/{,*/}*.html', '.tmp/styles/{,*/}*.css',
-              '<%= config.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}' ]
+          [ '<%= config.app %>/{,*/}*.html', 
+            '.tmp/styles/{,*/}*.css',
+            '<%= config.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}' 
+          ]
       }
     }
 
@@ -476,8 +470,12 @@ module.exports = function(grunt)
       }
 
       grunt.task.run(
-        [ 'clean:server', 'concurrent:server', 'autoprefixer',
-            'connect:livereload', 'watch' ]);
+        [ 'clean:server', 
+          'concurrent:server', 
+          'autoprefixer',
+          'connect:livereload', 
+          'watch' 
+        ]);
     });
 
   grunt.registerTask('test',
