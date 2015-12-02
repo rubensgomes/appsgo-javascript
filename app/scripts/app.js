@@ -1,30 +1,25 @@
 (function() {
-  /**
-   * @file File used to define the main application module and its
-   * dependencies.
-   *
-   * @author Rubens Gomes [rubens.s.gomes@gmail.com]
-   * @version $Id: app.js 428 2015-09-21 18:47:38Z rubens_gomes $
-   */
-  'use strict';
+    /**
+     * @file Creates the "app" module.
+     * 
+     * NOTE: Javascript variables have two scopes: function and global.
+     * 
+     * Notice that we are declaring self invoking anonymous function
+     * expressions; that is, "(function() {...}).();". This programming practice
+     * allows any variable declared within the scope of the annonymous function
+     * to be encapsulated and only visible within the scope and execution of
+     * that function. Therefore, it prevents the pollution of the global scope.
+     * 
+     * @author Rubens Gomes [rubens.s.gomes@gmail.com]
+     * @version $Id: app.js 592 2015-12-02 22:16:50Z rubens_gomes $
+     */
 
-  /*
-   * Note:
-   * 
-   * When defining a module with no module dependencies, 
-   * the array of dependencies should be defined empty.
-   * To retrieve a reference to the same module for further 
-   * configuration, call angular.module without the array argument.
-   *
-   * Calling angular.module without the array of dependencies when
-   * the module has not yet been defined causes this Error:
-   * 
-   *  error:nomod Module Unavailable error to be thrown.
-   *  
-   * To fix it, we define all our modules next .  
-   */
+    // place this function in "strict" operating context to prevent "unsafe"
+    // actions from happening, and to throw more exceptions.
+    'use strict';
 
-  angular.module('app', [ 'ngRoute', 'ngTouch', 'ngSanitize', 
-                          'app-core', 'app-constants', 'app.routes']);
+    // create the 'app' module
+    angular.module('app', [ 'ngRoute', 'ngTouch', 'ngSanitize', 'appCore', 
+                            'appConstants', 'appRoutes']);
 
 })();

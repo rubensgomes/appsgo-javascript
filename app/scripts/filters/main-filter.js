@@ -1,22 +1,34 @@
 (function() {
     /**
-     * @file A file where common filters are defined.
-     *
+     * @file Registers common filters with the "appCore" module. 
+     * 
+     * NOTE: Javascript variables have two scopes: function and global.
+     * 
+     * Notice that we are declaring self invoking anonymous function
+     * expressions; that is, "(function() {...}).();". This programming practice
+     * allows any variable declared within the scope of the annonymous function
+     * to be encapsulated and only visible within the scope and execution of
+     * that function. Therefore, it prevents the pollution of the global scope.
+     * 
      * @author Rubens Gomes [rubens.s.gomes@gmail.com]
-     * @version $Id: main-filter.js 429 2015-09-21 19:10:55Z rubens_gomes $
+     * @version $Id: main-filter.js 596 2015-12-02 22:37:38Z rubens_gomes $
      */
 
+    // place this function in "strict" operating context to prevent "unsafe"
+    // actions from happening, and to throw more exceptions.
     'use strict';
 
-    angular
-        .module('app-core')
-        .filter('asDate', asDate)
-        .filter('asDegreeSymbol', asDegreeSymbol);
+    // retrieves an appCore module previously created in app-core.js
+    var appCore = angular.module('appCore');
 
-    function asDate () {
-        return function (input) {
+    // registers some filters with appCore
+    appCore.filter('asDate', asDate);
+    appCore.filter('asDegreeSymbol', asDegreeSymbol);
 
-            if (! input) {
+    function asDate() {
+        return function(input) {
+
+            if (!input) {
                 throw new TypeError('input is undefined or null."');
             }
 
@@ -25,9 +37,9 @@
     }
 
     function asDegreeSymbol() {
-        return function (input) {
+        return function(input) {
 
-            if (! input) {
+            if (!input) {
                 throw new TypeError('input is undefined or null.');
             }
 

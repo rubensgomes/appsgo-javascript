@@ -1,16 +1,49 @@
 (function() {
     /**
-     * @file UnitsController file.
+     * @file Registers the UnitsController with the appCore module.
      *
-     * @author Rubens Gomes [rubens.s.gomes@gmail.com].
-     * @version $Id: units-ctrl.js 432 2015-09-24 09:17:27Z rubens_gomes $
+     *This controller provides the REST calls to calculate the unit conversion.
+     * 
+     * NOTE: Javascript variables have two scopes: function and global.
+     * 
+     * Notice that we are declaring self invoking anonymous function
+     * expressions; that is, "(function() {...}).();". This programming practice
+     * allows any variable declared within the scope of the annonymous function
+     * to be encapsulated and only visible within the scope and execution of
+     * that function. Therefore, it prevents the pollution of the global scope.
+     * 
+     * @author Rubens Gomes [rubens.s.gomes@gmail.com]
+     * @version $Id: units-ctrl.js 592 2015-12-02 22:16:50Z rubens_gomes $
      */
-    'use strict';
 
-    angular
-        .module('app-core')
-        .controller('UnitsController', UnitsController);
+    // place this function in "strict" operating context to prevent "unsafe"
+    // actions from happening, and to throw more exceptions.
+    'use strict'; 
 
+    // retrieves the appCore created in the app-core.js
+    var appCore = angular.module('appCore');
+    // registers the UnitsController with the appCore module
+    appCore.controller('UnitsController', UnitsController);
+
+    /**
+     * The UnitsController constructor.
+     * 
+     * @param {$LogProvider}
+     *            $log - the object used for logging.
+     * @param {$RootScopeProvider}
+     *            $rootScope - the global and unique scope object that used to
+     *            configure the page title.
+     * @param {Scope}
+     *            $scope - the application model object where state is shared
+     *            between this controller and the view.
+     * @param {$HttpProvider}
+     *            $http - the object used to make HTTP calls to REST services.
+     * @param utilityService-
+     *            a utility object to perform some miscellaneous operations.
+     * @param CONST -
+     *            the global angular constant object defined inside the
+     *            "appConstants" module
+     */
     function UnitsController ($log, $rootScope, $scope, $http, 
             utilityService, CONST) {
         $rootScope.title = 'Units';
@@ -189,6 +222,7 @@
 
     }
 
+    // annotate the UnitsController with the injectable parameters
     UnitsController.$inject = ['$log', '$rootScope', '$scope', '$http', 
                              'utilityService', 'CONST'];
 })();

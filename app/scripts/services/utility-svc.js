@@ -2,16 +2,39 @@
     /**
      * @file This file is a placeholder to define utility services used by the 
      * application.
-     *
+     * 
+     * NOTE: Javascript variables have two scopes: function and global.
+     * 
+     * Notice that we are declaring self invoking anonymous function
+     * expressions; that is, "(function() {...}).();". This programming practice
+     * allows any variable declared within the scope of the annonymous function
+     * to be encapsulated and only visible within the scope and execution of
+     * that function. Therefore, it prevents the pollution of the global scope.
+     * 
      * @author Rubens Gomes [rubens.s.gomes@gmail.com]
-     * @version $Id: utility-svc.js 428 2015-09-21 18:47:38Z rubens_gomes $
+     * @version $Id: utility-svc.js 592 2015-12-02 22:16:50Z rubens_gomes $
      */
+
+    // place this function in "strict" operating context to prevent "unsafe"
+    // actions from happening, and to throw more exceptions.
     'use strict';
 
-    angular
-        .module('app-core')
-        .factory('utilityService', utilityService);
+    // retrieves appCore module created in app-core.js
+    var appCore = angular.module('appCore');
+    // registers a factory utiltyService with appCore
+    appCore.factory('utilityService', utilityService);
 
+    /**
+     * The utiltyService factory.
+     * 
+     * @param {$LogProvider}
+     *            $log - the object used for logging.
+     * @param {$HttpProvider}
+     *            $http - the object used to make HTTP calls to REST services.
+     * @param CONST -
+     *            the global angular constant object defined inside the
+     *            "appConstants" module
+     */
     function utilityService($log, $http, CONST) {
         var service = {
                 isNumber : isNumber,
@@ -73,6 +96,7 @@
   
     }
 
+    // annotates the injectable parameters
     utilityService.$inject = ['$log', '$http', 'CONST'];
 
 })();

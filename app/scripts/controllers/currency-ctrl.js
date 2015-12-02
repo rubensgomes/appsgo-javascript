@@ -1,16 +1,53 @@
 (function() {
     /**
-     * @file Currency controller file
-     *
+     * @file Registers the CurrencyController controller with the "appCore"
+     *       angular module.
+     * 
+     * This controller has the business logic to retrieve different country
+     * currency values in relation to the US Dollar.
+     * 
+     * NOTE: Javascript variables have two scopes: function and global.
+     * 
+     * Notice that we are declaring self invoking anonymous function
+     * expressions; that is, "(function() {...}).();". This programming practice
+     * allows any variable declared within the scope of the annonymous function
+     * to be encapsulated and only visible within the scope and execution of
+     * that function. Therefore, it prevents the pollution of the global scope.
+     * 
      * @author Rubens Gomes [rubens.s.gomes@gmail.com]
-     * @version $Id: currency-ctrl.js 430 2015-09-21 19:37:27Z rubens_gomes $
+     * @version $Id: currency-ctrl.js 592 2015-12-02 22:16:50Z rubens_gomes $
      */
-    'use strict';
 
-    angular
-        .module('app-core')
-        .controller('CurrencyController', CurrencyController);
+    // place this function in "strict" operating context to prevent "unsafe"
+    // actions from happening, and to throw more exceptions.
+    'use strict'; 
 
+    // retrieve the previously created "appCore" (defined in app-core.js)
+    var appCore = angular.module('appCore');
+
+    // registers "CurrencyController" with the appCore module
+    appCore.controller('CurrencyController', CurrencyController);
+
+    /**
+     * The CurrencyController constructor.
+     * 
+     * @param {$LogProvider}
+     *            $log - the object used for logging.
+     * @param {$RootScopeProvider}
+     *            $rootScope - the global and unique scope object that used to
+     *            configure the page title.
+     * @param {Scope}
+     *            $scope - the application model object where state is shared
+     *            between this controller and the view.
+     * @param {$HttpProvider}
+     *            $http - the object used to make HTTP calls to REST services.
+     * @param usSpinnerService -
+     *            the object used to show a spinner on the GUI while certain
+     *            lengthy calls are being executed.
+     * @param CONST -
+     *            the global angular constant object defined inside the
+     *            "appConstants" module
+     */
     function CurrencyController ($log, $rootScope, $scope, $http, 
             usSpinnerService, CONST) {
         $rootScope.title = 'Currency';
@@ -66,12 +103,13 @@
         vm.currency = vm.currencies[1]; // default
 
         /**
-         * Converts USD to the selected currency. The result is assigned to the 
-         * $scope.result model object. If an error occurs, the $scope.error is 
+         * Converts USD to the selected currency. The result is assigned to the
+         * $scope.result model object. If an error occurs, the $scope.error is
          * assigned a message.
-         *
-         * @param value {string} - The value of the international currency code 
-         * to convert the U.S.Dollar to.
+         * 
+         * @param {String }
+         *            value - The value of the international currency code to
+         *            convert the U.S.Dollar to.
          */
         vm.toCurrency = function (value) {
             $scope.error = '';
@@ -110,11 +148,11 @@
         };
 
         /**
-         * Validates the input value to insure it is a valid currency code. 
-         *
-         * @param value {string} - The value the object to validate.
-         * @throws {TypeError} The argument value must be a valid currency 
-         * code.
+         * Validates the input value to insure it is a valid currency code.
+         * 
+         * @param {String} value - The value the object to validate.
+         * @throws {TypeError}
+         *             The argument value must be a valid currency code.
          */
         function isCurrency (value) {
             $log.debug('checking if [' + value + '] is a currency code');
@@ -147,10 +185,11 @@
             vm.toCurrency(defaultValue);
         }
 
-        // initialize the template when it is loaded
+        // call init() to initialize the default currency to be displayed on the view
         init();
     }
 
+    // annotate the controller function with the parameters to be injected
     CurrencyController.$inject = ['$log', '$rootScope', '$scope', '$http', 
                                   'usSpinnerService', 'CONST'];
 

@@ -1,8 +1,8 @@
 {
   "name": "appsgo",
-  "version": "2015.11.dev1",
+  "version": "2015.12.dev1",
   "description": "appsgo contains mobile web apps developed using AngularJS",
-  "license": "ISC",
+  "license": "SEE LICENSE IN LICENSE.md",
   "main": "Gruntfile.js",
   "author": "Rubens S. Gomes <rubens.s.gomes@gmail.com> (http://www.rubens-gomes.com/)",
   "repository": {

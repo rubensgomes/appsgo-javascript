@@ -2,15 +2,51 @@
     /**
      * @file IoT controller file.
      * 
-     * @author Rubens Gomes [rubens.s.gomes@gmail.com].
-     * @version $Id: iot-ctrl.js 428 2015-09-21 18:47:38Z rubens_gomes $
+     * This controller connects with a REST service to retrieve past temperature
+     * sensor readings from Rubens IOT sensor at his home.
+     * 
+     * NOTE: Javascript variables have two scopes: function and global.
+     * 
+     * Notice that we are declaring self invoking anonymous function
+     * expressions; that is, "(function() {...}).();". This programming practice
+     * allows any variable declared within the scope of the annonymous function
+     * to be encapsulated and only visible within the scope and execution of
+     * that function. Therefore, it prevents the pollution of the global scope.
+     * 
+     * @author Rubens Gomes [rubens.s.gomes@gmail.com]
+     * @version $Id: iot-ctrl.js 592 2015-12-02 22:16:50Z rubens_gomes $
      */
-    'use strict';
 
-    angular
-        .module('app-core')
-        .controller('IoTController', IoTController);
+    // place this function in "strict" operating context to prevent "unsafe"
+    // actions from happening, and to throw more exceptions.
+    'use strict'; 
 
+    // retrieves "appCore" module created in app-core.js
+    var appCore = angular.module('appCore');
+    // register IoTController to appCore
+    appCore.controller('IoTController', IoTController);
+
+    /**
+     * The IoT controller provides a REST call to retrieve past temperature
+     * readings from Rubens IoT RESTful service.
+     * 
+     * @param {$LogProvider}
+     *            $log - the object used for logging.
+     * @param {$RootScopeProvider}
+     *            $rootScope - the global and unique scope object that used to
+     *            configure the page title.
+     * @param {Scope}
+     *            $scope - the application model object where state is shared
+     *            between this controller and the view.
+     * @param {$HttpProvider}
+     *            $http - the object used to make HTTP calls to REST services.
+     * @param usSpinnerService -
+     *            the object used to show a spinner on the GUI while certain
+     *            lengthy calls are being executed.
+     * @param CONST -
+     *            the global angular constant object defined inside the
+     *            "appConstants" module
+     */
     function IoTController($log, $rootScope, $scope, $http, 
             usSpinnerService, CONST) {
         $rootScope.title = 'IoT';
@@ -128,7 +164,8 @@
         // initialize the template when it is loaded
         init();
     }
-    
+
+    // Annotate the IoTController with the injectable parameters
     IoTController.$inject = ['$log', '$rootScope', '$scope', '$http', 
                              'usSpinnerService', 'CONST'];
 
