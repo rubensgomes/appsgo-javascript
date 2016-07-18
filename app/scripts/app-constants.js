@@ -22,11 +22,11 @@
     var appConstants = angular.module('appConstants', []);
     appConstants.constant('CONST', {
             MIN_SEARCH_TEXT_LEN : 3,
-            LENGTH_UNIT_REST_URL : 'http://api.restportal.com:80/length/',
-            MASS_UNIT_REST_URL : 'http://api.restportal.com:80/weight/',
-            TEMPERATURE_UNIT_REST_URL : 'http://api.restportal.com:80/temperature/',
-            TEMPERATURE_REST_URL : 'http://api.restportal.com:80/analytics/temperature/sensors/000006c01f0b',
-            CURRENCY_REST_URL : 'https://openexchangerates.org/latest.json?app_id=30255f99fd69456d8dd50fe9af849aab'
+            LENGTH_UNIT_REST_URL : 'http://appsgo.mobi/restportal/length/',
+            MASS_UNIT_REST_URL : 'http://appsgo.mobi/restportal/weight/',
+            TEMPERATURE_UNIT_REST_URL : 'http://appsgo.mobi/restportal/temperature/',
+            TEMPERATURE_REST_URL : 'http://appsgo.mobi/restportal/analytics/temperature/sensors/000006c01f0b',
+            CURRENCY_REST_URL : 'http://appsgo.mobi/currency/latest.json?app_id=30255f99fd69456d8dd50fe9af849aab'
         });
 
 })();

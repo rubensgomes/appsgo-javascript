@@ -62,7 +62,7 @@
         /**
          * All the possible durations that may be used when retrieving data from
          * the Sensor Temperature RESTFul API.
-         */
+         *
         vm.durations = [ {
             label : 'Last 5 Years',
             value : 'last5Years'
@@ -107,6 +107,28 @@
             value : 'lastHour'
         }];
         vm.duration = vm.durations[12]; // default
+        */
+
+        vm.durations = [ {
+            label : 'Last 3 Days',
+            value : 'last3Days'
+        }, {
+            label : 'Last Day',
+            value : 'lastDay'
+        }, {
+            label : 'Last 24 Hours',
+            value : 'last24Hours'
+        }, {
+            label : 'Last 12 Hours',
+            value : 'last12Hours'
+        }, {
+            label : 'Last 6 Hours',
+            value : 'last6Hours'
+        }, {
+            label : 'Last Hour',
+            value : 'lastHour'
+        }];
+        vm.duration = vm.durations[5]; // default
 
         /**
          * Retrieves sensor temperature readings from the Sensor Temperature 

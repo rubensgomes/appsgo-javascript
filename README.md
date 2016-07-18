@@ -3,7 +3,8 @@
 The appsgo.mobi is a mobile web application that provides unit converstion
 utilities (length, temperature, mass) and currency rates.  This mobile web
 application was developed as a playground for 
-[Rubens](http://www.rubens-gomes.com) to learn more about the AngularJS JavaScript framework.
+[Rubens](http://www.rubens-gomes.com) to learn more about the AngularJS 
+JavaScript framework.
 
 The mobile web app is currently deployed in the following site:
 
@@ -22,7 +23,7 @@ proper running of "node" and "npm".
     npm -v
 
 * Open a shell command prompt, and run the following commands to install
-Node.js modules required during development
+the following Node.js modules globally. 
 
     npm install -g grunt
     npm install -g grunt-cli
@@ -31,13 +32,21 @@ Node.js modules required during development
 
 https://github.com/rubensgomes/AppsGo.mobi
 
+* Create a "secret.json" file with the following information:
+	{
+		"host" : "<deployment server",
+		"port" : <deployment server port number>,
+		"username" : "<deployment server username to authenticate>",
+		"password" : "<deployment server password to authenticate>"
+	}
+
 * Open a shell command prompt, and go to the appsgo.mobi installed directory.
 Then run the following commands
 
     npm install load-grunt-tasks
-    npm install grunt
 
     npm cache clean
+
     npm install
 
 
@@ -66,6 +75,12 @@ The Gruntfile.js is a manifest file for the grunt build and deployment tool.
 
 ## package.json
 
-The package.json file is a manifest file for the npm tool.
+The package.json file is a manifest file for the npm tool.  The "npm install"
+command reads the package.json file and install all the dependencies in the
+current folder.
 
+# secret.json
+
+The secret.json file contains information that is used by one of the
+grunt tasks used to deploy the application.
 
