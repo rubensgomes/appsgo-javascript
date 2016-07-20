@@ -160,12 +160,16 @@
                         }
                     })
                     .error(function(data) {
-                        $log.error('REST call failed.');
-                        $scope.error = data.error.message;
+                        $scope.error = "REST call [" + restUrl + "] failed.";
+                        if(data && data.error && data.error.message)
+                        	$scope.error += " : " + data.error.message;
+                        $log.error($scope.error);
                     });
             } catch (err) {
-                $log.error('REST call failed.');
-                $scope.error = err.message;
+                $scope.error = "REST call [" + restUrl + "] failed.";
+                if(err && err.message)
+                	$scope.error += ' : ' + err.message;
+                $log.error($scope.error);
             } finally {
                 usSpinnerService.stop('spinner-1');
             }

@@ -135,13 +135,18 @@
                         }
                     })
                     .error( function(data, status) {
-                        $log.error('REST call failed.');
-                        $scope.error = 'HTTP Error [' + status + '] calling [' + url +
-                            '] description [' + data.description + ']';
+                        $scope.error = "REST call [" + url + "] failed.";
+                        if(data && data.error && data.error.message)
+                        	$scope.error += " : " + data.error.message;
+                        if(status)
+                        	$scope.error += ". status : " + status;
+                        $log.error($scope.error);
                     });
             } catch (err) {
-                $log.error('REST call failed.');
-                $scope.error = err.message;
+                $scope.error = "REST call [" + url + "] failed.";
+                if(err && err.message)
+                	$scope.error += ' : ' + err.message;
+                $log.error($scope.error);
             } finally {
                 usSpinnerService.stop('spinner-1');
             } 
