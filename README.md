@@ -1,9 +1,9 @@
 # appsgo
 
 appsgo is a mobile web application that provides unit convertion
-(length, temperature, mass), currency rates, and other utilities 
+(length, temperature, mass), currency rates, and other utilities
 (like sensor temperature at Rubens' living room).  This mobile web
-application was developed as a playground for [Rubens](http://www.rubens-gomes.com) 
+application was developed as a playground for [Rubens](http://www.rubens-gomes.com)
 to learn more about the AngularJS JavaScript framework.
 
 The mobile web app is currently deployed in the following site:
@@ -23,14 +23,14 @@ proper running of "node" and "npm".
     npm -v
 
 * Open a shell command prompt, and run the following commands to install
-the following Node.js modules globally. 
+the following Node.js modules globally.
 
     npm install -g grunt
     npm install -g grunt-cli
 
 * Checkout the project from my GitHub:
 
-https://github.com/rubensgomes/AppsGo.mobi
+https://github.com/rubensgomes/appsgo
 
 * Create a "secret.json" file with the following information:
 
@@ -41,7 +41,7 @@ https://github.com/rubensgomes/AppsGo.mobi
 		"password" : "<deployment server password to authenticate>"
 	}
 
-* Open a shell command prompt, and go to the appsgo.mobi installed directory.
+* Open a shell command prompt, and go to the appsgo installed directory.
 Then run the following commands
 
     npm install load-grunt-tasks
@@ -55,7 +55,7 @@ Then run the following commands
 
 In order to run a local build follow these steps:
 
-* Open a shell command prompt and go to the installed appsgo.mobi path. 
+* Open a shell command prompt and go to the installed appsgo path.
 Then run the following command to do build:
 
     grunt -d -v clean build
