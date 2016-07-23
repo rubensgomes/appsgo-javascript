@@ -8,7 +8,7 @@
      * NOTE: Javascript variables have two scopes: function and global.
      * 
      * Notice that we are declaring self invoking anonymous function
-     * expressions; that is, "(function() {...}).();". This programming practice
+     * expressions; that is, '(function() {...}).();'. This programming practice
      * allows any variable declared within the scope of the annonymous function
      * to be encapsulated and only visible within the scope and execution of
      * that function. Therefore, it prevents the pollution of the global scope.
@@ -16,11 +16,11 @@
      * @author Rubens Gomes
      */
 
-    // place this function in "strict" operating context to prevent "unsafe"
+    // place this function in 'strict' operating context to prevent 'unsafe'
     // actions from happening, and to throw more exceptions.
     'use strict'; 
 
-    // retrieves "appCore" module created in app-core.js
+    // retrieves 'appCore' module created in app-core.js
     var appCore = angular.module('appCore');
     // register IoTController to appCore
     appCore.controller('IoTController', IoTController);
@@ -44,7 +44,7 @@
      *            lengthy calls are being executed.
      * @param CONST -
      *            the global angular constant object defined inside the
-     *            "appConstants" module
+     *            'appConstants' module
      */
     function IoTController($log, $rootScope, $scope, $http, 
             usSpinnerService, CONST) {
@@ -159,15 +159,19 @@
                         }
                     })
                     .error(function(data) {
-                        $scope.error = "REST call [" + restUrl + "] failed.";
+                        $scope.error = 'REST call [' + restUrl + '] failed.';
                         if(data && data.error && data.error.message)
-                        	$scope.error += " : " + data.error.message;
+                        {
+                        	$scope.error += ' : ' + data.error.message;
+                        }
                         $log.error($scope.error);
                     });
             } catch (err) {
-                $scope.error = "REST call [" + restUrl + "] failed.";
+                $scope.error = 'REST call [' + restUrl + '] failed.';
                 if(err && err.message)
+                {
                 	$scope.error += ' : ' + err.message;
+                }
                 $log.error($scope.error);
             } finally {
                 usSpinnerService.stop('spinner-1');

@@ -1,4 +1,9 @@
-// GruntFile.js
+/*
+ * GruntFile.js
+ *
+ * @author: Rubens Gomes
+ */
+
 'use strict';
 
 module.exports = function(grunt)
@@ -24,53 +29,22 @@ module.exports = function(grunt)
 
     config : properties,
 
-    // grunt-autoprefixer: Add vendor prefixed styles
-    autoprefixer :
-    {
-      options :
-      {
-        browsers : [ 'last 1 version' ]
-      },
-      dist :
-      {
-        files :
-          [
-           {
-              expand : true,
-              cwd : '.tmp/styles/',
-              src : '{,*/}*.css',
-              dest : '.tmp/styles/'
-            }
-          ]
-      }
-    },
-
-    // grunt-contrib-clean: empties folders to start fresh
+    // grunt-contrib-clean: empties dist folder to start fresh
     clean :
     {
-      dist : ['<%= config.dist %>'],
-      server : ['.tmp']
+      folder : ['<%= config.dist %>']
     },
 
-    // grunt-concurrent: Run some tasks in parallel to speed up the build
-    // process
-    concurrent :
-    {
-      server : [ 'copy:styles' ],
-      test : [ 'copy:styles' ],
-      dist : [ 'copy:styles', 'imagemin', 'svgmin' ]
-    },
-
-    // grunt-contrib-connect: The actual grunt server settings
+    // grunt-contrib-connect: the local grunt server settings
     connect :
     {
       options :
       {
+        base : '<%= config.dist %>',
         port : 9000,
         hostname : 'localhost',
         livereload : 35729
       },
-
       livereload :
       {
         options :
@@ -78,69 +52,31 @@ module.exports = function(grunt)
           open : true,
           middleware : function(connect)
           {
-            return [ connect.static('.tmp'), connect.static(properties.app) ];
+            return [ connect.static('<%= config.app %>') ];
           }
-        }
-      },
-
-      test :
-      {
-        options :
-        {
-          port : 9001,
-          middleware : function(connect)
-          {
-            return  [ connect.static('.tmp'), connect.static(properties.app) ];
-          }
-        }
-      },
-
-      dist :
-      {
-        options :
-        {
-          open : true,
-          base : '<%= config.dist %>'
         }
       }
     },
 
-    // grunt-contrib-copy: Copies remaining files to places other tasks can use
+    // grunt-contrib-copy: Copies HTML, CSS and image files to dist folder
+    // do not copy main.css because it is being handled by usemin
     copy :
     {
       dist :
       {
-        files :
-          [
-            {
-              expand : true,
-              dot : true,
-              cwd : '<%= config.app %>',
-              dest : '<%= config.dist %>',
-              src :
-                [ '*.{ico,png,txt}', 
-                  '.htaccess', 
-                  '*.html',
-                  'views/{,*/}*.html', 
-                  'images/{,*/}*.{webp}', 
-                  'fonts/*',
-                  'themes/*'
-                ]
-            },
-            {
-              expand : true,
-              cwd : '.tmp/images',
-              dest : '<%= config.dist %>/images',
-              src : [ 'generated/*' ]
-            } 
-          ]
-      },
-      styles :
-      {
-        expand : true,
-        cwd : '<%= config.app %>/styles',
-        dest : '.tmp/styles/',
-        src : '{,*/}*.css'
+        files : [{
+          expand : true,
+          dot : true,
+          cwd : '<%= config.app %>',
+          dest : '<%= config.dist %>',
+          src : [ '*.{html,ico,txt}',
+                  '.htaccess',
+                  'images/{,*/}*.{jpg,png}',
+                  'styles/{,*/}*.{css}',
+                  '!styles/main.css',
+                  'themes/{,*/}*.{css,gif,jpg,png}',
+                  'views/{,*/}*.html']
+         }]
       }
     },
 
@@ -149,71 +85,13 @@ module.exports = function(grunt)
     {
       dist :
       {
-        src :
-          [ '<%= config.dist %>/scripts/{,*/}*.js',
-            '<%= config.dist %>/styles/{,*/}*.css',
-            '<%= config.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-            '<%= config.dist %>/styles/fonts/*' 
-          ]
+        src :[ '<%= config.dist %>/scripts/{,*/}*.js',
+               '<%= config.dist %>/styles/{,*/}*.css',
+               '<%= config.dist %>/images/{,*/}*.{gif,jpg,png}']
       }
     },
 
-    // grunt-contrib-htmlmin: Minify HTML
-    htmlmin :
-    {
-      dist :
-      {
-        options :
-        {
-          collapseWhitespace : false,
-          conservativeCollapse : false,
-          collapseBooleanAttributes : true,
-          removeCommentsFromCDATA : false,
-          removeOptionalTags : true
-        },
-        files :
-          [
-          {
-            expand : true,
-            cwd : '<%= config.dist %>',
-            src :
-              [ '*.html', 'views/{,*/}*.html' ],
-            dest : '<%= config.dist %>'
-          } ]
-      }
-    },
-
-    // grunt-contrib-imagemin: Minify images.
-    imagemin :
-    {
-      dist :
-      {
-        files :
-          [
-          {
-            expand : true,
-            cwd : '<%= config.app %>/images',
-            src : '{,*/}*.{png,jpg,jpeg,gif}',
-            dest : '<%= config.dist %>/images'
-          } ]
-      }
-    },
-
-    // grunt-jsdoc: generate javascript jsdoc
-    jsdoc : 
-    {
-      dist : 
-      {
-        src: ['<%= config.app %>/scripts/*.js'],
-        options: 
-        {
-            destination: '<%= config.dist %>/doc'
-        }
-      }
-    },
-
-    // grunt-contrib-jshint: Make sure code styles are up to par and there are
-    // no obvious mistakes
+    // grunt-contrib-jshint: Checks javascript coding styles.
     jshint :
     {
       options :
@@ -222,50 +100,9 @@ module.exports = function(grunt)
         laxbreak : true,
         reporter : require('jshint-stylish')
       },
-
       all :
       {
-        src :
-          [ 'Gruntfile.js', '<%= config.app %>/scripts/{,*/}*.js']
-      },
-
-      test :
-      {
-        options :
-        {
-          jshintrc : 'test/.jshintrc'
-        },
-        src :
-          [ 'test/spec/{,*/}*.js' ]
-      }
-    },
-
-    // grunt-karma: Test settings
-    karma :
-    {
-      unit :
-      {
-        configFile : 'test/karma.conf.js',
-        singleRun : true
-      }
-    },
-
-    // grunt-ng-annotate: annotate tries to make the code safe for
-    // minification automatically by using the Angular long form for
-    // dependency injection.
-    ngAnnotate :
-    {
-      dist :
-      {
-        files :
-          [
-          {
-            expand : true,
-            cwd : '.tmp/concat/scripts',
-            src :
-              [ '*.js', '!oldieshim.js' ],
-            dest : '.tmp/concat/scripts'
-          } ]
+        src : [ 'Gruntfile.js', '<%= config.app %>/scripts/{,*/}*.js']
       }
     },
 
@@ -314,173 +151,81 @@ module.exports = function(grunt)
       }
     },
 
-    // grunt-svgmin: Minify SVG using SVGO
-    svgmin :
-    {
-      dist :
-      {
-        files :
-          [
-          {
-            expand : true,
-            cwd : '<%= config.app %>/images',
-            src : '{,*/}*.svg',
-            dest : '<%= config.dist %>/images'
-          } ]
-      }
-    },
-
-    // grunt-svn-export: SVN export the app sources to dist/src
-    svnexport:
-    {
-      dev:
-      {
-        options:
-        {
-          bin: 'svn',
-          repository: '<%= config.app %>',
-          output: '<%= config.dist %>/src'
-        }
-      }
-    },
-
-    // grunt-usemin: Performs rewrites based on filerev and the useminPrepare
-    // configuration
-    usemin :
-    {
-      html :
-        [ '<%= config.dist %>/{,*/}*.html' ],
-      css :
-        [ '<%= config.dist %>/styles/{,*/}*.css' ],
-      options :
-      {
-        assetsDirs :
-          [ '<%= config.dist %>', '<%= config.dist %>/images' ]
-      }
-    },
-
     // grunt-usemin: Reads HTML for usemin blocks to enable smart builds that
-    // automatically concat, minify and revision files. Creates configurations
-    // in memory so additional tasks can operate on them
+    // automatically concat, minify and revision files.
     useminPrepare :
     {
       html : '<%= config.app %>/index.html',
       options :
       {
-        dest : '<%= config.dist %>',
-        flow :
-        {
-          html :
-          {
-            steps :
-            {
-              // grunt-contrib-concat : Concatenates JS files
-              // grunt-contrib-uglify : Minify JS files.
-              js :
-                [ 'concat', 'uglifyjs' ],
-              // grunt-contrib-cssmin: Compress CSS files
-              css :
-                [ 'cssmin' ]
-            },
-            post :
-            {}
-          }
-        }
+        dest : '<%= config.dist %>'
       }
     },
 
-    // grunt-contrib-watch: Watches files for changes and runs tasks based on
-    // the changed files
+    // grunt-usemin: rewrites based on filerev and useminPrepare configuration
+    usemin :
+    {
+      html : [ '<%= config.dist %>/{,*/}*.html' ],
+      options :
+      {
+        assetsDirs : [ '<%= config.dist %>' ]
+      }
+    },
+
+    // grunt-contrib-watch: Watches files for changes, runs tasks based on
+    // the changed files, and reload server.
     watch :
     {
-      js :
+      scripts :
       {
-        files :
-          [ '<%= config.app %>/scripts/{,*/}*.js' ],
-        tasks :
-          [ 'newer:jshint:all' ],
+        files : [ '<%= config.app %>/scripts/{,*/}*.js' ],
+        tasks : [ 'newer:jshint:all' ],
         options :
         {
           livereload : '<%= connect.options.livereload %>'
         }
       },
-
-      jsTest :
+      configFiles :
       {
-        files :
-          [ 'test/spec/{,*/}*.js' ],
-        tasks :
-          [ 'newer:jshint:test', 'karma' ]
+        files : [ 'Gruntfile.js' ],
+        options :
+        {
+          reload : true
+        }
       },
-
-      styles :
-      {
-        files :
-          [ '<%= config.app %>/styles/{,*/}*.css' ],
-        tasks :
-          [ 'newer:copy:styles', 'autoprefixer' ]
-      },
-
-      gruntfile :
-      {
-        files :
-          [ 'Gruntfile.js' ]
-      },
-
       livereload :
       {
+        files : [ '<%= config.app %>/{,*/}*.html',
+                  '.tmp/styles/{,*/}*.css',
+                  '<%= config.app %>/images/{,*/}*.{gif,jpg,png}' ],
         options :
         {
           livereload : '<%= connect.options.livereload %>'
-        },
-        files :
-          [ '<%= config.app %>/{,*/}*.html', 
-            '.tmp/styles/{,*/}*.css',
-            '<%= config.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}' 
-          ]
+        }
       }
     }
 
   });
 
-  grunt.registerTask('buildProd',
-    [ 'clean:dist', 'useminPrepare', 'concurrent:dist',
-        'autoprefixer', 'concat', 'ngAnnotate', 'copy:dist', 
-        'cssmin', 'uglify', 'filerev', 'usemin', 'htmlmin' ]);
-
   grunt.registerTask('build',
-    [ 'clean:dist', 'autoprefixer', 'ngAnnotate',
-        'copy:dist', 'filerev' ]);
+      [ 'clean',
+          'useminPrepare',
+          'copy:dist',
+          'concat:generated',
+          'cssmin:generated',
+          'uglify:generated',
+          'filerev',
+          'usemin']);
 
   grunt.registerTask('default',
-    [ 'newer:jshint', 'test', 'build' ]);
+      [ 'newer:jshint', 'build' ]);
+
 
   grunt.registerTask('deploy',
-    [ 'default', 'sshexec:clean', 'sftp:copy' ]);
+      [ 'default', 'sshexec:clean', 'sftp:copy' ]);
 
-//  grunt.registerTask('deploy',
-//    [ 'default', 'sshexec:clean', 'svnexport:dev', 'sftp:copy' ]);
+  grunt.registerTask('serve',
+      [ 'default', 'connect:livereload', 'watch' ]);
 
-  grunt.registerTask('serve', 'Compile then start a connect web server',
-    function(target)
-    {
-      if (target === 'dist')
-      {
-        return grunt.task.run([ 'build', 'connect:dist:keepalive' ]);
-      }
-
-      grunt.task.run(
-        [ 'clean:server', 
-          'concurrent:server', 
-          'autoprefixer',
-          'connect:livereload', 
-          'watch' 
-        ]);
-    });
-
-  grunt.registerTask('test',
-    [ 'clean:server', 'concurrent:test', 'autoprefixer', 'connect:test'
-        //'karma'
-    ]);
 
 };

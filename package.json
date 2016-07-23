@@ -1,8 +1,8 @@
 {
   "name": "appsgo",
   "version": "0.1.0",
-  "description": "mobile web app developed using AngularJS",
-  "license": "SEE LICENSE IN LICENSE.md",
+  "description": "mobile webapp developed using AngularJS",
+  "license": "UNLICENSED",
   "main": "Gruntfile.js",
   "author": "Rubens S. Gomes <rubens.s.gomes@gmail.com> (http://www.rubens-gomes.com/)",
   "repository": {
@@ -12,11 +12,7 @@
   "directories": {
     "app": "app",
     "misc": "misc",
-    "dist": "dist",
-    "test": "test"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dist": "dist"
   },
   "keywords": [
     "appsgo",
@@ -25,32 +21,19 @@
   "dependencies": {},
   "devDependencies": {
     "grunt": "^0.4.5",
-    "grunt-autoprefixer": "^2.0.0",
-    "grunt-concurrent": "^1.0.0",
-    "grunt-contrib-clean": "^0.6.0",
-    "grunt-contrib-concat": "^0.5.0",
-    "grunt-contrib-connect": "^0.9.0",
-    "grunt-contrib-copy": "^0.7.0",
-    "grunt-contrib-cssmin": "^0.10.0",
-    "grunt-contrib-htmlmin": "^0.3.0",
-    "grunt-contrib-imagemin": "^1.0.1",
-    "grunt-contrib-jshint": "^0.10.0",
-    "grunt-contrib-uglify": "^0.6.0",
-    "grunt-contrib-watch": "^0.6.1",
-    "grunt-filerev": "^2.1.2",
-    "grunt-jsdoc": "^0.6.8",
-    "grunt-karma": "^0.9.0",
-    "grunt-newer": "^0.8.0",
-    "grunt-ng-annotate": "^0.7.0",
-    "grunt-ssh": "^0.12.0",
-    "grunt-svgmin": "^2.0.0",
-    "grunt-svn-export": "^0.1.7",
-    "grunt-usemin": "^3.0.0",
-    "jasmine-core": "^2.1.2",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-connect": "^1.0.2",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-cssmin": "^1.0.1",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-contrib-uglify": "^2.0.0",
+    "grunt-filerev": "^2.3.1",
+    "grunt-newer": "^1.2.0",
+    "grunt-ssh": "^0.12.9",
+    "grunt-usemin": "3.0.0",
     "jshint-stylish": "^1.0.0",
-    "karma": "^0.12.25",
-    "karma-jasmine": "^0.3.0",
-    "karma-phantomjs-launcher": "^0.1.4",
     "load-grunt-tasks": "^1.0.0",
     "time-grunt": "^1.0.0"
   },

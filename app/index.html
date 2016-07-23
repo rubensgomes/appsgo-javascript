@@ -1,7 +1,7 @@
 <!doctype html>
-<!--  
+<!--
   HTML5 index.html file.
-  
+
   @author Rubens Gomes
 -->
 <html lang="en" data-ng-app="app" data-ng-strict-di>
@@ -17,8 +17,10 @@
   <title data-ng-bind-template=" AppsGo - {{title}}"></title>
 
   <style>
-    /* This helps the ng-show/ng-hide animations start at the right place. */
-    /* Since Angular has this but needs to load, this gives us the class early. */
+    /* This helps the ng-show/ng-hide animations start
+     * at the right place.  Since Angular has this but
+     * needs to load, this gives us the class early.
+     */
     .ng-hide {
         display: none!important;
     }
@@ -31,9 +33,11 @@
   <!-- JQuery Mobile -->
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
 
-  <!-- build:css(.tmp) styles/main.css -->
+  <!-- Application CSS -->
+  <!-- build:css styles/main.css -->
   <link rel="stylesheet" href="styles/main.css">
   <!-- endbuild -->
+
 </head>
 
 <body>
@@ -55,13 +59,11 @@
   This site does not work on this version of the Internet Explorer browser.
   </p>
   <p>
-  Please <a href="http://browsehappy.com/">upgrade your browser</a> to 
+  Please <a href="http://browsehappy.com/">upgrade your browser</a> to
   improve your experience.
   </p>
 </div>
 <![endif]-->
-
-<!--[if gte IE 9]>
 
   <div data-role="page" class="ui-responsive-panel">
 
@@ -168,7 +170,7 @@
   <!--AngularJS loading spinner JavaScript-->
   <script src="http://fgnass.github.io/spin.js/spin.js"></script>
 
-  <!-- build:js({.tmp,app}) scripts/scripts.js -->
+  <!-- build:js scripts/scripts.js -->
   <script src="scripts/app.js"></script>
   <script src="scripts/app-core.js"></script>
   <script src="scripts/app-constants.js"></script>
@@ -182,9 +184,6 @@
   <script src="scripts/services/utility-svc.js"></script>
   <script src="scripts/third-party/angular-spinner.js"></script>
   <!-- endbuild -->
-
-
-<![endif]-->
 
 <script type="text/javascript">
 //<![CDATA[

@@ -1,6 +1,6 @@
 (function() {
     /**
-     * @file Registers the CurrencyController controller with the "appCore"
+     * @file Registers the CurrencyController controller with the 'appCore'
      *       angular module.
      * 
      * This controller has the business logic to retrieve different country
@@ -9,7 +9,7 @@
      * NOTE: Javascript variables have two scopes: function and global.
      * 
      * Notice that we are declaring self invoking anonymous function
-     * expressions; that is, "(function() {...}).();". This programming practice
+     * expressions; that is, '(function() {...}).();'. This programming practice
      * allows any variable declared within the scope of the annonymous function
      * to be encapsulated and only visible within the scope and execution of
      * that function. Therefore, it prevents the pollution of the global scope.
@@ -17,14 +17,14 @@
      * @author Rubens Gomes
      */
 
-    // place this function in "strict" operating context to prevent "unsafe"
+    // place this function in 'strict' operating context to prevent 'unsafe'
     // actions from happening, and to throw more exceptions.
     'use strict'; 
 
-    // retrieve the previously created "appCore" (defined in app-core.js)
+    // retrieve the previously created 'appCore' (defined in app-core.js)
     var appCore = angular.module('appCore');
 
-    // registers "CurrencyController" with the appCore module
+    // registers 'CurrencyController' with the appCore module
     appCore.controller('CurrencyController', CurrencyController);
 
     /**
@@ -45,7 +45,7 @@
      *            lengthy calls are being executed.
      * @param CONST -
      *            the global angular constant object defined inside the
-     *            "appConstants" module
+     *            'appConstants' module
      */
     function CurrencyController ($log, $rootScope, $scope, $http, 
             usSpinnerService, CONST) {
@@ -134,17 +134,23 @@
                         }
                     })
                     .error( function(data, status) {
-                        $scope.error = "REST call [" + url + "] failed.";
+                        $scope.error = 'REST call [' + url + '] failed.';
                         if(data && data.error && data.error.message)
-                        	$scope.error += " : " + data.error.message;
+                        {
+                        	$scope.error += ' : ' + data.error.message;
+                        }
                         if(status)
-                        	$scope.error += ". status : " + status;
+                        {
+                        	$scope.error += '. status : ' + status;
+                        }
                         $log.error($scope.error);
                     });
             } catch (err) {
-                $scope.error = "REST call [" + url + "] failed.";
+                $scope.error = 'REST call [' + url + '] failed.';
                 if(err && err.message)
+                {
                 	$scope.error += ' : ' + err.message;
+                }
                 $log.error($scope.error);
             } finally {
                 usSpinnerService.stop('spinner-1');

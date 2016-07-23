@@ -3,7 +3,6 @@
 User-agent: *
 Disallow: /images/
 Disallow: /scripts/
-Disallow: /src/
 Disallow: /styles/
 Disallow: /themes/
 Disallow: /views/

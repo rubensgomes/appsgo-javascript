@@ -19,6 +19,7 @@
     'use strict';
 
     var appConstants = angular.module('appConstants', []);
+    /* jshint ignore:start */
     appConstants.constant('CONST', {
             MIN_SEARCH_TEXT_LEN : 3,
             LENGTH_UNIT_REST_URL : 'http://www.rubens-gomes.com/appsgo/restportal/length/',
@@ -27,5 +28,5 @@
             TEMPERATURE_REST_URL : 'http://www.rubens-gomes.com/appsgo/restportal/analytics/temperature/sensors/000006c01f0b',
             CURRENCY_REST_URL : 'http://www.rubens-gomes.com/appsgo/currency/latest.json?app_id=30255f99fd69456d8dd50fe9af849aab'
         });
-
+    /* jshint ignore:end */
 })();
