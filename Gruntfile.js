@@ -36,25 +36,24 @@ module.exports = function(grunt)
     // grunt-contrib-clean: empties dist folder to start fresh
     clean :
     {
+      options: { force: true },
       folder : ['<%= config.dist %>']
     },
 
     // grunt-contrib-connect: the local grunt server settings
     connect :
     {
-      options :
+      server :
       {
-        base : '<%= config.dist %>',
-        debug: true,
-        port : 9000,
-        hostname : 'localhost',
-        livereload : 35729,
-        open : true,
-        middleware : function(connect)
-        {
-          return [ serveStatic('<%= config.app %>'),
-                   serveIndex('<%= config.app %>') ];
-        }
+          options :
+          {
+            base : '<%= config.app %>',
+            debug: true,
+            port : 9000,
+            hostname : 'localhost',
+            livereload : 35729,
+            open : true
+          }
       }
     },
 
@@ -184,7 +183,7 @@ module.exports = function(grunt)
         tasks : [ 'newer:jshint:all' ],
         options :
         {
-          livereload : '<%= connect.options.livereload %>'
+          livereload : '<%= connect.server.options.livereload %>'
         }
       },
       configFiles :
@@ -202,7 +201,7 @@ module.exports = function(grunt)
                   '<%= config.app %>/images/{,*/}*.{gif,jpg,png}' ],
         options :
         {
-          livereload : '<%= connect.options.livereload %>'
+          livereload : '<%= connect.server.options.livereload %>'
         }
       }
     }
@@ -226,6 +225,6 @@ module.exports = function(grunt)
       [ 'default', 'sshexec:clean', 'sftp:copy' ]);
 
   grunt.registerTask('serve',
-      [ 'default', 'connect', 'watch' ]);
+      [ 'default', 'connect:server', 'watch' ]);
 
 };
