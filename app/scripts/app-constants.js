@@ -4,13 +4,13 @@
      * to be used in the application.
      *
      * NOTE: Javascript variables have two scopes: function and global.
-     * 
+     *
      * Notice that we are declaring self invoking anonymous function
      * expressions; that is, "(function() {...}).();". This programming practice
      * allows any variable declared within the scope of the annonymous function
      * to be encapsulated and only visible within the scope and execution of
      * that function. Therefore, it prevents the pollution of the global scope.
-     * 
+     *
      * @author Rubens Gomes
      */
 
@@ -18,7 +18,9 @@
     // actions from happening, and to throw more exceptions.
     'use strict';
 
+    // create and load an appConstants module
     var appConstants = angular.module('appConstants', []);
+
     /* jshint ignore:start */
     appConstants.constant('CONST', {
             MIN_SEARCH_TEXT_LEN : 3,
