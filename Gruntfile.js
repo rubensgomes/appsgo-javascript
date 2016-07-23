@@ -23,6 +23,10 @@ module.exports = function(grunt)
     deployFolder : '/var/www/appsgo'
   };
 
+  // used to start a server locally
+  var serveIndex = require('serve-index');
+  var serveStatic = require('serve-static');
+
   // Define the configuration for all the tasks
   grunt.initConfig(
   {
@@ -41,19 +45,15 @@ module.exports = function(grunt)
       options :
       {
         base : '<%= config.dist %>',
+        debug: true,
         port : 9000,
         hostname : 'localhost',
-        livereload : 35729
-      },
-      livereload :
-      {
-        options :
+        livereload : 35729,
+        open : true,
+        middleware : function(connect)
         {
-          open : true,
-          middleware : function(connect)
-          {
-            return [ connect.static('<%= config.app %>') ];
-          }
+          return [ serveStatic('<%= config.app %>'),
+                   serveIndex('<%= config.app %>') ];
         }
       }
     },
@@ -102,7 +102,9 @@ module.exports = function(grunt)
       },
       all :
       {
-        src : [ 'Gruntfile.js', '<%= config.app %>/scripts/{,*/}*.js']
+        src : [ 'Gruntfile.js',
+                '<%= config.app %>/scripts/{,*/}*.js',
+                '!<%= config.app %>/scripts/third-party/{,*/}*.js']
       }
     },
 
@@ -220,12 +222,10 @@ module.exports = function(grunt)
   grunt.registerTask('default',
       [ 'newer:jshint', 'build' ]);
 
-
   grunt.registerTask('deploy',
       [ 'default', 'sshexec:clean', 'sftp:copy' ]);
 
   grunt.registerTask('serve',
-      [ 'default', 'connect:livereload', 'watch' ]);
-
+      [ 'default', 'connect', 'watch' ]);
 
 };

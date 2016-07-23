@@ -3,21 +3,21 @@
      * @file Registers the UnitsController with the appCore module.
      *
      *This controller provides the REST calls to calculate the unit conversion.
-     * 
+     *
      * NOTE: Javascript variables have two scopes: function and global.
-     * 
+     *
      * Notice that we are declaring self invoking anonymous function
      * expressions; that is, '(function() {...}).();'. This programming practice
      * allows any variable declared within the scope of the annonymous function
      * to be encapsulated and only visible within the scope and execution of
      * that function. Therefore, it prevents the pollution of the global scope.
-     * 
+     *
      * @author Rubens Gomes
      */
 
     // place this function in 'strict' operating context to prevent 'unsafe'
     // actions from happening, and to throw more exceptions.
-    'use strict'; 
+    'use strict';
 
     // retrieves the appCore created in the app-core.js
     var appCore = angular.module('appCore');
@@ -26,7 +26,7 @@
 
     /**
      * The UnitsController constructor.
-     * 
+     *
      * @param {$LogProvider}
      *            $log - the object used for logging.
      * @param {$RootScopeProvider}
@@ -43,7 +43,7 @@
      *            the global angular constant object defined inside the
      *            'appConstants' module
      */
-    function UnitsController ($log, $rootScope, $scope, $http, 
+    function UnitsController ($log, $rootScope, $scope, $http,
             utilityService, CONST) {
         $rootScope.title = 'Units';
         $scope.error = '';
@@ -95,10 +95,10 @@
             $scope.error = '';
             $scope.result = '';
 
+            var url = CONST.LENGTH_UNIT_REST_URL + toUnit +
+              '?from_unit=' + fromUnit + '&from_value=' + value;
             try {
                 utilityService.isNumber(value);
-                var url = CONST.LENGTH_UNIT_REST_URL + toUnit +
-                    '?from_unit=' + fromUnit + '&from_value=' + value; 
                 $log.debug('Calling REST URL [' + url + ']');
                 $http
                     .get(url)
@@ -152,7 +152,7 @@
             try {
                 utilityService.isNumber(value);
                 var url = CONST.MASS_UNIT_REST_URL + toUnit +
-                    '?from_unit=' + fromUnit + '&from_value=' + value; 
+                    '?from_unit=' + fromUnit + '&from_value=' + value;
                 $log.debug('Calling REST URL [' + url + ']');
                 $http
                     .get(url)
@@ -180,7 +180,7 @@
 
             try {
                 utilityService.isNumber(value);
-                var url = CONST.TEMPERATURE_UNIT_REST_URL + 
+                var url = CONST.TEMPERATURE_UNIT_REST_URL +
                     'degF?from_unit=degC&from_value=' + value;
                 $log.debug('Calling REST URL [' + url + ']');
                 $http
@@ -207,7 +207,7 @@
 
             try {
                 utilityService.isNumber(value);
-                var url = CONST.TEMPERATURE_UNIT_REST_URL + 
+                var url = CONST.TEMPERATURE_UNIT_REST_URL +
                     'degC?from_unit=degF&from_value=' + value;
                 $http
                     .get(url)
@@ -230,6 +230,6 @@
     }
 
     // annotate the UnitsController with the injectable parameters
-    UnitsController.$inject = ['$log', '$rootScope', '$scope', '$http', 
+    UnitsController.$inject = ['$log', '$rootScope', '$scope', '$http',
                              'utilityService', 'CONST'];
 })();

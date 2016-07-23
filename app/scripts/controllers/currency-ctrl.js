@@ -2,24 +2,24 @@
     /**
      * @file Registers the CurrencyController controller with the 'appCore'
      *       angular module.
-     * 
+     *
      * This controller has the business logic to retrieve different country
      * currency values in relation to the US Dollar.
-     * 
+     *
      * NOTE: Javascript variables have two scopes: function and global.
-     * 
+     *
      * Notice that we are declaring self invoking anonymous function
      * expressions; that is, '(function() {...}).();'. This programming practice
      * allows any variable declared within the scope of the annonymous function
      * to be encapsulated and only visible within the scope and execution of
      * that function. Therefore, it prevents the pollution of the global scope.
-     * 
+     *
      * @author Rubens Gomes
      */
 
     // place this function in 'strict' operating context to prevent 'unsafe'
     // actions from happening, and to throw more exceptions.
-    'use strict'; 
+    'use strict';
 
     // retrieve the previously created 'appCore' (defined in app-core.js)
     var appCore = angular.module('appCore');
@@ -29,7 +29,7 @@
 
     /**
      * The CurrencyController constructor.
-     * 
+     *
      * @param {$LogProvider}
      *            $log - the object used for logging.
      * @param {$RootScopeProvider}
@@ -47,7 +47,7 @@
      *            the global angular constant object defined inside the
      *            'appConstants' module
      */
-    function CurrencyController ($log, $rootScope, $scope, $http, 
+    function CurrencyController ($log, $rootScope, $scope, $http,
             usSpinnerService, CONST) {
         $rootScope.title = 'Currency';
         $scope.error = '';
@@ -105,7 +105,7 @@
          * Converts USD to the selected currency. The result is assigned to the
          * $scope.result model object. If an error occurs, the $scope.error is
          * assigned a message.
-         * 
+         *
          * @param {String }
          *            value - The value of the international currency code to
          *            convert the U.S.Dollar to.
@@ -115,10 +115,10 @@
             $scope.result = '';
             $scope.date = '';
 
+            var url = CONST.CURRENCY_REST_URL + '&prettyprint';
             try {
                 isCurrency(value);
                 usSpinnerService.spin('spinner-1');
-                var url = CONST.CURRENCY_REST_URL + '&prettyprint';
                 $log.debug('Calling REST URL [' + url + ']');
                 $http
                     .get(url)
@@ -128,7 +128,7 @@
                             $scope.error = 'null response calling [' + url + ']';
                         } else {
                           $log.debug('REST call succeeded.');
-                          $scope.result = 'U.S. $1.00 = ' + 
+                          $scope.result = 'U.S. $1.00 = ' +
                               data.rates['' + value] + ' ' + value;
                           $scope.date = new Date(data.timestamp * 1000);
                         }
@@ -154,12 +154,12 @@
                 $log.error($scope.error);
             } finally {
                 usSpinnerService.stop('spinner-1');
-            } 
+            }
         };
 
         /**
          * Validates the input value to insure it is a valid currency code.
-         * 
+         *
          * @param {String} value - The value the object to validate.
          * @throws {TypeError}
          *             The argument value must be a valid currency code.
@@ -200,7 +200,7 @@
     }
 
     // annotate the controller function with the parameters to be injected
-    CurrencyController.$inject = ['$log', '$rootScope', '$scope', '$http', 
+    CurrencyController.$inject = ['$log', '$rootScope', '$scope', '$http',
                                   'usSpinnerService', 'CONST'];
 
 })();
