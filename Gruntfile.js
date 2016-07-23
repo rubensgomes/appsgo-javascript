@@ -20,7 +20,7 @@ module.exports = function(grunt)
   {
     app : 'app',
     dist : 'dist',
-    deployFolder : '/var/www/appsgo'
+    deployFolder : '/var/www/rubens-gomes/appsgo'
   };
 
   // used to start a server locally
@@ -37,7 +37,7 @@ module.exports = function(grunt)
     clean :
     {
       options: { force: true },
-      folder : ['<%= config.dist %>']
+      folder : ['.tmp', '<%= config.dist %>']
     },
 
     // grunt-contrib-connect: the local grunt server settings
