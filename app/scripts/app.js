@@ -25,12 +25,20 @@
         $httpProvider.interceptors.push('middleware');
     }]);
 
+    // add context-path "/appsgo/" to the URL
     app.factory('middleware', function() {
         return {
             request: function(config) {
-                if (! config.url.startsWith('/appsgo/')) {
-                    config.url = '/appsgo/' + config.url;
-                }
+              // For REST Calls do not change the URL.
+              if ( config.url.startsWith('http://') ||
+                   config.url.startsWith('https://') ) {
+                return config;
+              }
+
+              if (! config.url.startsWith('/appsgo/')) {
+                config.url = '/appsgo/' + config.url;
+              }
+
                 return config;
             }
         };

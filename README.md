@@ -34,12 +34,12 @@ https://github.com/rubensgomes/appsgo
 
 * Create a "secret.json" file with the following information:
 ```
-  {
+{
     "host" : "<deployment server>",
     "port" : <deployment server port number>,
     "username" : "<deployment server username to authenticate>",
     "password" : "<deployment server password to authenticate>"
-  }
+}
 ```
 
 * Open a shell command prompt, and go to the appsgo installed directory.
