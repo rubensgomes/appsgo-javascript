@@ -11,8 +11,7 @@
      * to be encapsulated and only visible within the scope and execution of
      * that function. Therefore, it prevents the pollution of the global scope.
      * 
-     * @author Rubens Gomes [rubens.s.gomes@gmail.com]
-     * @version $Id: app-constants.js 592 2015-12-02 22:16:50Z rubens_gomes $
+     * @author Rubens Gomes
      */
 
     // place this function in "strict" operating context to prevent "unsafe"
@@ -22,11 +21,11 @@
     var appConstants = angular.module('appConstants', []);
     appConstants.constant('CONST', {
             MIN_SEARCH_TEXT_LEN : 3,
-            LENGTH_UNIT_REST_URL : 'http://appsgo.mobi/restportal/length/',
-            MASS_UNIT_REST_URL : 'http://appsgo.mobi/restportal/weight/',
-            TEMPERATURE_UNIT_REST_URL : 'http://appsgo.mobi/restportal/temperature/',
-            TEMPERATURE_REST_URL : 'http://appsgo.mobi/restportal/analytics/temperature/sensors/000006c01f0b',
-            CURRENCY_REST_URL : 'https://appsgo.mobi/currency/latest.json?app_id=30255f99fd69456d8dd50fe9af849aab'
+            LENGTH_UNIT_REST_URL : 'http://www.rubens-gomes.com/appsgo/restportal/length/',
+            MASS_UNIT_REST_URL : 'http://www.rubens-gomes.com/appsgo/restportal/weight/',
+            TEMPERATURE_UNIT_REST_URL : 'http://www.rubens-gomes.com/appsgo/restportal/temperature/',
+            TEMPERATURE_REST_URL : 'http://www.rubens-gomes.com/appsgo/restportal/analytics/temperature/sensors/000006c01f0b',
+            CURRENCY_REST_URL : 'http://www.rubens-gomes.com/appsgo/currency/latest.json?app_id=30255f99fd69456d8dd50fe9af849aab'
         });
 
 })();

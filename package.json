@@ -1,12 +1,12 @@
 {
   "name": "appsgo",
   "version": "0.1.0",
-  "description": "web apps developed using AngularJS",
+  "description": "mobile web app developed using AngularJS",
   "license": "SEE LICENSE IN LICENSE.md",
   "main": "Gruntfile.js",
   "author": "Rubens S. Gomes <rubens.s.gomes@gmail.com> (http://www.rubens-gomes.com/)",
   "repository": {
-    "type": "svn",
+    "type": "git",
     "url": "git+https://github.com/rubensgomes/appsgo.git"
   },
   "directories": {
@@ -33,7 +33,7 @@
     "grunt-contrib-copy": "^0.7.0",
     "grunt-contrib-cssmin": "^0.10.0",
     "grunt-contrib-htmlmin": "^0.3.0",
-    "grunt-contrib-imagemin": "^0.9.2",
+    "grunt-contrib-imagemin": "^1.0.1",
     "grunt-contrib-jshint": "^0.10.0",
     "grunt-contrib-uglify": "^0.6.0",
     "grunt-contrib-watch": "^0.6.1",
@@ -45,7 +45,7 @@
     "grunt-ssh": "^0.12.0",
     "grunt-svgmin": "^2.0.0",
     "grunt-svn-export": "^0.1.7",
-    "grunt-usemin": "^2.6.2",
+    "grunt-usemin": "^3.0.0",
     "jasmine-core": "^2.1.2",
     "jshint-stylish": "^1.0.0",
     "karma": "^0.12.25",
@@ -57,5 +57,5 @@
   "bugs": {
     "url": "https://github.com/rubensgomes/appsgo/issues"
   },
-  "homepage": "https://github.com/rubensgomes/appsgo#readme"
+  "homepage": "https://github.com/rubensgomes/AppsGo.mobi"
 }

@@ -10,8 +10,7 @@
      * to be encapsulated and only visible within the scope and execution of
      * that function. Therefore, it prevents the pollution of the global scope.
      * 
-     * @author Rubens Gomes [rubens.s.gomes@gmail.com]
-     * @version $Id: main-ctrl.js 595 2015-12-02 22:32:27Z rubens_gomes $
+     * @author Rubens Gomes
      */
 
     // place this function in "strict" operating context to prevent "unsafe"

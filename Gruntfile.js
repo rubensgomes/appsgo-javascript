@@ -443,12 +443,12 @@ module.exports = function(grunt)
 
   });
 
-  grunt.registerTask('build',
+  grunt.registerTask('buildProd',
     [ 'clean:dist', 'useminPrepare', 'concurrent:dist',
         'autoprefixer', 'concat', 'ngAnnotate', 'copy:dist', 
         'cssmin', 'uglify', 'filerev', 'usemin', 'htmlmin' ]);
 
-  grunt.registerTask('buildDev',
+  grunt.registerTask('build',
     [ 'clean:dist', 'autoprefixer', 'ngAnnotate',
         'copy:dist', 'filerev' ]);
 
