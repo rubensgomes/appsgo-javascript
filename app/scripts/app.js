@@ -17,31 +17,33 @@
     // actions from happening, and to throw more exceptions.
     'use strict';
 
-    // create the 'app' module
-    var app = angular.module('app', [ 'ngRoute', 'ngTouch', 'ngSanitize', 'appCore',
-                                      'appConstants', 'appRoutes']);
+    // load the 'app' module with dependencies. app module was created inside
+    // the index.html file.
+    var app = angular.module('app', [ 'ngRoute', 'ngTouch', 'ngSanitize',
+                                      'appCore','appConstants', 'appRoutes']);
 
-    app.config(['$httpProvider', function($httpProvider) {
-        $httpProvider.interceptors.push('middleware');
+    app.config(['$httpProvider',
+                '$windowProvider',
+                function($httpProvider, $windowProvider) {
+      $httpProvider.interceptors.push(function() {
+        return {
+          request: function(config) {
+            var $window = $windowProvider.$get();
+            // For REST Calls do not change the URL.
+            if ( config.url.startsWith('http://') ||
+                 config.url.startsWith('https://') ) {
+              return config;
+            }
+
+            if (! config.url.startsWith($window.CONTEXT_PATH)) {
+              config.url = $window.CONTEXT_PATH + config.url;
+            }
+
+            return config;
+          }
+        };
+      });
     }]);
 
-    // add context-path "/appsgo/" to the URL
-    app.factory('middleware', function() {
-        return {
-            request: function(config) {
-              // For REST Calls do not change the URL.
-              if ( config.url.startsWith('http://') ||
-                   config.url.startsWith('https://') ) {
-                return config;
-              }
-
-              if (! config.url.startsWith('/appsgo/')) {
-                config.url = '/appsgo/' + config.url;
-              }
-
-                return config;
-            }
-        };
-    });
 
 })();

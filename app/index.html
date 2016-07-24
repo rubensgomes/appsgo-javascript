@@ -6,7 +6,7 @@
 -->
 <html lang="en" data-ng-app="app" data-ng-strict-di>
 <head>
-  <base href="http://www.rubens-gomes.com/appsgo/" />
+  <base href="@@BASE@@" />
   <meta charset="utf-8">
   <meta name="description" content="Mobile Web Apps">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -168,6 +168,13 @@
 
   <!--AngularJS loading spinner JavaScript-->
   <script src="http://fgnass.github.io/spin.js/spin.js"></script>
+
+  <!--  define global CONTEXT_PATH variable. Substitution during build -->
+  <script type="text/javascript">
+  //<![CDATA[
+    var CONTEXT_PATH = '@@CONTEXT_PATH@@';
+  //]]>
+  </script>
 
   <!-- build:js scripts/scripts.js -->
   <script src="scripts/app.js"></script>

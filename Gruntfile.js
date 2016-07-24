@@ -23,10 +23,6 @@ module.exports = function(grunt)
     deployFolder : '/var/www/rubens-gomes/appsgo'
   };
 
-  // used to start a server locally
-  var serveIndex = require('serve-index');
-  var serveStatic = require('serve-static');
-
   // Define the configuration for all the tasks
   grunt.initConfig(
   {
@@ -47,7 +43,7 @@ module.exports = function(grunt)
       {
           options :
           {
-            base : '<%= config.app %>',
+            base : '<%= config.dist %>',
             debug: true,
             port : 9000,
             hostname : 'localhost',
@@ -58,10 +54,27 @@ module.exports = function(grunt)
     },
 
     // grunt-contrib-copy: Copies HTML, CSS and image files to dist folder
-    // do not copy main.css because it is being handled by usemin
+    // do not copy index.html because it is being handled by string-replace
+    // For deployment builds:
+    // - do not copy main.css because it is being handled by usemin
     copy :
     {
-      dist :
+      serve :
+      {
+        files : [{
+          expand : true,
+          cwd : '<%= config.app %>',
+          dest : '<%= config.dist %>',
+          src : [ '*.{html,ico,txt}',
+                  '!index.html',
+                  'images/{,*/}*.{jpg,png}',
+                  'scripts/{,*/}*.js',
+                  'styles/{,*/}*.css',
+                  'themes/{,*/}*.{css,gif,jpg,png}',
+                  'views/{,*/}*.html']
+         }]
+      },
+      deploy :
       {
         files : [{
           expand : true,
@@ -69,6 +82,7 @@ module.exports = function(grunt)
           cwd : '<%= config.app %>',
           dest : '<%= config.dist %>',
           src : [ '*.{html,ico,txt}',
+                  '!index.html',
                   '.htaccess',
                   'images/{,*/}*.{jpg,png}',
                   'styles/{,*/}*.{css}',
@@ -109,6 +123,43 @@ module.exports = function(grunt)
 
     // grunt-ssh (secret): don't keep passwords in source control
     secret : grunt.file.readJSON('secret.json'),
+
+    // grunt-string-replace: replace @@BASE@@ in the index.html file
+    'string-replace' :
+    {
+      serve :
+      {
+        files: [{
+          src: '<%= config.app %>/index.html',
+          dest: '<%= config.dist %>/index.html'
+        }],
+        options: {
+          replacements: [{
+            pattern: '@@BASE@@',
+            replacement: 'http://localhost:9000/'
+          },{
+            pattern: '@@CONTEXT_PATH@@',
+            replacement: '/'
+          }]
+        }
+      },
+      deploy:
+      {
+        files: [{
+          src: '<%= config.app %>/index.html',
+          dest: '<%= config.dist %>/index.html'
+        }],
+        options: {
+          replacements: [{
+            pattern: '@@BASE@@',
+            replacement: 'http://www.rubens-gomes.com/appsgo/'
+          },{
+            pattern: '@@CONTEXT_PATH@@',
+            replacement: '/appsgo/'
+          }]
+        }
+      }
+    },
 
     // grunt-ssh (sftp): copy files to remote server
     sftp :
@@ -208,23 +259,28 @@ module.exports = function(grunt)
 
   });
 
-  grunt.registerTask('build',
+  // build used to start local server
+  grunt.registerTask('localBuild',
+      [ 'clean',
+          'string-replace:serve',
+          'copy:serve']);
+
+  // build used for deployment
+  grunt.registerTask('deployBuild',
       [ 'clean',
           'useminPrepare',
-          'copy:dist',
+          'string-replace:deploy',
+          'copy:deploy',
           'concat:generated',
           'cssmin:generated',
           'uglify:generated',
           'filerev',
           'usemin']);
 
-  grunt.registerTask('default',
-      [ 'newer:jshint', 'build' ]);
-
   grunt.registerTask('deploy',
-      [ 'default', 'sshexec:clean', 'sftp:copy' ]);
+      [ 'deployBuild', 'sshexec:clean', 'sftp:copy' ]);
 
   grunt.registerTask('serve',
-      [ 'default', 'connect:server', 'watch' ]);
+      [ 'localBuild', 'connect:server', 'watch' ]);
 
 };
