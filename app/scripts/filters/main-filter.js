@@ -1,15 +1,15 @@
 (function() {
     /**
-     * @file Registers common filters with the "appCore" module. 
-     * 
+     * @file Registers common filters with the "app" module.
+     *
      * NOTE: Javascript variables have two scopes: function and global.
-     * 
+     *
      * Notice that we are declaring self invoking anonymous function
      * expressions; that is, "(function() {...}).();". This programming practice
      * allows any variable declared within the scope of the annonymous function
      * to be encapsulated and only visible within the scope and execution of
      * that function. Therefore, it prevents the pollution of the global scope.
-     * 
+     *
      * @author Rubens Gomes
      */
 
@@ -17,12 +17,12 @@
     // actions from happening, and to throw more exceptions.
     'use strict';
 
-    // retrieves an appCore module previously created in app-core.js
-    var appCore = angular.module('appCore');
+    // retrieves an app module previously created in app-core.js
+    var app = angular.module('app');
 
-    // registers some filters with appCore
-    appCore.filter('asDate', asDate);
-    appCore.filter('asDegreeSymbol', asDegreeSymbol);
+    // registers some filters with app
+    app.filter('asDate', asDate);
+    app.filter('asDegreeSymbol', asDegreeSymbol);
 
     function asDate() {
         return function(input) {

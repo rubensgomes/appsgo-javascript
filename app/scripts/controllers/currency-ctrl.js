@@ -1,6 +1,6 @@
 (function() {
     /**
-     * @file Registers the CurrencyController controller with the 'appCore'
+     * @file Registers the CurrencyController controller with the 'app'
      *       angular module.
      *
      * This controller has the business logic to retrieve different country
@@ -21,11 +21,11 @@
     // actions from happening, and to throw more exceptions.
     'use strict';
 
-    // retrieve the previously created 'appCore' (defined in app-core.js)
-    var appCore = angular.module('appCore');
+    // retrieve the previously created 'app' (defined in app.js)
+    var app = angular.module('app');
 
-    // registers 'CurrencyController' with the appCore module
-    appCore.controller('CurrencyController', CurrencyController);
+    // registers 'CurrencyController' with the app module
+    app.controller('CurrencyController', CurrencyController);
 
     /**
      * The CurrencyController constructor.

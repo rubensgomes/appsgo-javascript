@@ -1,34 +1,35 @@
 (function(){
     /**
      * @file IoT controller file.
-     * 
+     *
      * This controller connects with a REST service to retrieve past temperature
      * sensor readings from Rubens IOT sensor at his home.
-     * 
+     *
      * NOTE: Javascript variables have two scopes: function and global.
-     * 
+     *
      * Notice that we are declaring self invoking anonymous function
      * expressions; that is, '(function() {...}).();'. This programming practice
      * allows any variable declared within the scope of the annonymous function
      * to be encapsulated and only visible within the scope and execution of
      * that function. Therefore, it prevents the pollution of the global scope.
-     * 
+     *
      * @author Rubens Gomes
      */
 
     // place this function in 'strict' operating context to prevent 'unsafe'
     // actions from happening, and to throw more exceptions.
-    'use strict'; 
+    'use strict';
 
-    // retrieves 'appCore' module created in app-core.js
-    var appCore = angular.module('appCore');
-    // register IoTController to appCore
-    appCore.controller('IoTController', IoTController);
+    // retrieves 'app' module created in app.js
+    var app= angular.module('app');
+
+    // register IoTController to app
+    app.controller('IoTController', IoTController);
 
     /**
      * The IoT controller provides a REST call to retrieve past temperature
      * readings from Rubens IoT RESTful service.
-     * 
+     *
      * @param {$LogProvider}
      *            $log - the object used for logging.
      * @param {$RootScopeProvider}
@@ -46,7 +47,7 @@
      *            the global angular constant object defined inside the
      *            'appConstants' module
      */
-    function IoTController($log, $rootScope, $scope, $http, 
+    function IoTController($log, $rootScope, $scope, $http,
             usSpinnerService, CONST) {
         $rootScope.title = 'IoT';
         $scope.error = '';
@@ -130,7 +131,7 @@
         vm.duration = vm.durations[5]; // default
 
         /**
-         * Retrieves sensor temperature readings from the Sensor Temperature 
+         * Retrieves sensor temperature readings from the Sensor Temperature
          * REST API.
          *
          * @param duration {string} - The duration for the temperature data.
@@ -140,7 +141,7 @@
             vm.sensorData = [];
             vm.sensorData.length = 0;
 
-            var restUrl = CONST.TEMPERATURE_REST_URL + '?duration=' + 
+            var restUrl = CONST.TEMPERATURE_REST_URL + '?duration=' +
                 vm.duration.value;
 
             try {
@@ -154,7 +155,7 @@
                         for (index = 0; index < result.data.length; ++index) {
                             element = result.data[index];
                             vm.sensorData.push(
-                                    new SensorTemperature(index, element.unit, 
+                                    new SensorTemperature(index, element.unit,
                                             element.value, element.utc));
                         }
                     })
@@ -195,7 +196,7 @@
     }
 
     // Annotate the IoTController with the injectable parameters
-    IoTController.$inject = ['$log', '$rootScope', '$scope', '$http', 
+    IoTController.$inject = ['$log', '$rootScope', '$scope', '$http',
                              'usSpinnerService', 'CONST'];
 
 })();

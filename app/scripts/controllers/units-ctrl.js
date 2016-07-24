@@ -1,6 +1,6 @@
 (function() {
     /**
-     * @file Registers the UnitsController with the appCore module.
+     * @file Registers the UnitsController with the app module.
      *
      *This controller provides the REST calls to calculate the unit conversion.
      *
@@ -19,10 +19,11 @@
     // actions from happening, and to throw more exceptions.
     'use strict';
 
-    // retrieves the appCore created in the app-core.js
-    var appCore = angular.module('appCore');
-    // registers the UnitsController with the appCore module
-    appCore.controller('UnitsController', UnitsController);
+    // retrieves the app created in the app.js
+    var app = angular.module('app');
+
+    // registers the UnitsController with the app module
+    app.controller('UnitsController', UnitsController);
 
     /**
      * The UnitsController constructor.

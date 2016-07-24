@@ -1,15 +1,15 @@
 (function() {
     /**
-     * @file Register the "JavaScriptController" with the "appCore" module.
-     * 
+     * @file Register the "JavaScriptController" with the "app" module.
+     *
      * NOTE: Javascript variables have two scopes: function and global.
-     * 
+     *
      * Notice that we are declaring self invoking anonymous function
      * expressions; that is, "(function() {...}).();". This programming practice
      * allows any variable declared within the scope of the annonymous function
      * to be encapsulated and only visible within the scope and execution of
      * that function. Therefore, it prevents the pollution of the global scope.
-     * 
+     *
      * @author Rubens Gomes
      */
 
@@ -17,14 +17,15 @@
     // actions from happening, and to throw more exceptions.
     'use strict';
 
-    // retrieves the "appCore" module created in app-core.js
-    var appCore = angular.module('appCore');
-    // register JavaScriptController with appCore
-    appCore.controller('JavaScriptController', JavaScriptController);
+    // retrieves the "app" module created in app.js
+    var app = angular.module('app');
+
+    // register JavaScriptController with app
+    app.controller('JavaScriptController', JavaScriptController);
 
     /**
      * The JavaScriptController constructor.
-     * 
+     *
      * @param {$RootScopeProvider}
      *            $rootScope - the global and unique scope object that used to
      *            configure the page title.
@@ -81,22 +82,22 @@
         vm.whatIsX3 = function() {
             var x = [];
             foo(x);
-            vm.answer3 = 'x is [ ' + 
-                x + 
-                ' ]. ' + 
-                'Notice, \'bar\" is a variable in the stack of the \"foo\" ' + 
-                'function. Therefore, changing its value to null has no efect ' + 
+            vm.answer3 = 'x is [ ' +
+                x +
+                ' ]. ' +
+                'Notice, \'bar\" is a variable in the stack of the \"foo\" ' +
+                'function. Therefore, changing its value to null has no efect ' +
                 'on the \"x\"  array object.';
         };
 
         vm.whatIsX4 = function() {
             var x = [];
             bar(x);
-            vm.answer4 = 'x is [ ' + 
-                x + 
-                ' ]. ' + 
-                'Notice, \"foo\" has de-referenced the actual object. ' + 
-                'Therefore, \"foo[0]\" is now the actual array object passed as ' + 
+            vm.answer4 = 'x is [ ' +
+                x +
+                ' ]. ' +
+                'Notice, \"foo\" has de-referenced the actual object. ' +
+                'Therefore, \"foo[0]\" is now the actual array object passed as ' +
                 'a reference to the bar function.';
         };
 
