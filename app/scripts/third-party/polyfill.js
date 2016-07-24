@@ -1,4 +1,5 @@
 (function() {
+
   /**
    * @file Defines polyfills to add features not supported by the browser.
    *
