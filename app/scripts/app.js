@@ -20,7 +20,8 @@
     // load the 'app' module with dependencies. app module was created inside
     // the index.html file.
     var app = angular.module('app', [ 'ngRoute', 'ngTouch', 'ngSanitize',
-                                      'appCore','appConstants', 'appRoutes']);
+                                      'appCore','appConstants', 'appRoutes',
+                                      'angularSpinner']);
 
     app.config(['$httpProvider',
                 '$windowProvider',

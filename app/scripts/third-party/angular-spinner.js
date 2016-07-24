@@ -1,119 +1,138 @@
 /**
- * angular-spinner version 0.6.1
+ * angular-spinner version 0.8.1
  * License: MIT.
- * Copyright (C) 2013, 2014, Uri Shaked and contributors.
+ * Copyright (C) 2013, 2014, 2015, 2016, Uri Shaked and contributors.
  */
 
+'format amd';
+
 (function (root) {
-	'use strict';
+  'use strict';
 
-	function factory(angular, Spinner) {
+  function factory(angular, Spinner) {
 
-		return angular
-			.module('angularSpinner', [])
+    return angular
+      .module('angularSpinner', [])
 
-			.provider('usSpinnerConfig', function () {
-				var _config = {};
+      .constant('SpinJSSpinner', Spinner)
 
-				return {
-					setDefaults: function (config) {
-						_config = config || _config;
-					},
-					$get: function () {
-						return {
-							config: _config
-						};
-					}
-				};
-			})
+      .provider('usSpinnerConfig', function () {
+        var _config = {}, _themes = {};
 
-			.factory('usSpinnerService', ['$rootScope', function ($rootScope) {
-				var config = {};
+        return {
+          setDefaults: function (config) {
+            _config = config || _config;
+          },
+          setTheme: function(name, config) {
+            _themes[name] = config;
+          },
+          $get: function () {
+            return {
+              config: _config,
+              themes: _themes
+            };
+          }
+        };
+      })
 
-				config.spin = function (key) {
-					$rootScope.$broadcast('us-spinner:spin', key);
-				};
+      .factory('usSpinnerService', ['$rootScope', function ($rootScope) {
+        var config = {};
 
-				config.stop = function (key) {
-					$rootScope.$broadcast('us-spinner:stop', key);
-				};
+        config.spin = function (key) {
+          $rootScope.$broadcast('us-spinner:spin', key);
+        };
 
-				return config;
-			}])
+        config.stop = function (key) {
+          $rootScope.$broadcast('us-spinner:stop', key);
+        };
 
-			.directive('usSpinner', ['$window', 'usSpinnerConfig', function ($window, usSpinnerConfig) {
-				return {
-					scope: true,
-					link: function (scope, element, attr) {
-						var SpinnerConstructor = Spinner || $window.Spinner;
+        return config;
+      }])
 
-						scope.spinner = null;
+      .directive('usSpinner', ['SpinJSSpinner', 'usSpinnerConfig', function (SpinJSSpinner, usSpinnerConfig) {
+        return {
+          scope: true,
+          link: function (scope, element, attr) {
+            scope.spinner = null;
 
-						scope.key = angular.isDefined(attr.spinnerKey) ? attr.spinnerKey : false;
+            scope.key = angular.isDefined(attr.spinnerKey) ? attr.spinnerKey : false;
 
-						scope.startActive = angular.isDefined(attr.spinnerStartActive) ?
-							scope.$eval(attr.spinnerStartActive) : scope.key ?
-							false : true;
+            scope.startActive = angular.isDefined(attr.spinnerStartActive) ?
+              scope.$eval(attr.spinnerStartActive) : scope.key ?
+              false : true;
 
-						function stopSpinner() {
-							if (scope.spinner) {
-								scope.spinner.stop();
-							}
-						}
+            function stopSpinner() {
+              if (scope.spinner) {
+                scope.spinner.stop();
+              }
+            }
 
-						scope.spin = function () {
-							if (scope.spinner) {
-								scope.spinner.spin(element[0]);
-							}
-						};
+            scope.spin = function () {
+              if (scope.spinner) {
+                scope.spinner.spin(element[0]);
+              }
+            };
 
-						scope.stop = function () {
-							scope.startActive = false;
-							stopSpinner();
-						};
+            scope.stop = function () {
+              scope.startActive = false;
+              stopSpinner();
+            };
 
-						scope.$watch(attr.usSpinner, function (options) {
-							stopSpinner();
+            scope.$watch(attr.usSpinner, function (options) {
+              stopSpinner();
 
-							options = options || {};
-							for (var property in usSpinnerConfig.config) {
-							    if (options[property] === undefined) {
-							        options[property] = usSpinnerConfig.config[property];
-							    }
-							}
+              // order of precedence: element options, theme, defaults.
+              options = angular.extend(
+                {},
+                usSpinnerConfig.config,
+                usSpinnerConfig.themes[attr.spinnerTheme],
+                options);
 
-							scope.spinner = new SpinnerConstructor(options);
-							if (!scope.key || scope.startActive) {
-								scope.spinner.spin(element[0]);
-							}
-						}, true);
+              scope.spinner = new SpinJSSpinner(options);
+              if ((!scope.key || scope.startActive) && !attr.spinnerOn) {
+                scope.spinner.spin(element[0]);
+              }
+            }, true);
 
-						scope.$on('us-spinner:spin', function (event, key) {
-							if (key === scope.key) {
-								scope.spin();
-							}
-						});
+            if (attr.spinnerOn) {
+              scope.$watch(attr.spinnerOn, function (spin) {
+                if (spin) {
+                  scope.spin();
+                } else {
+                  scope.stop();
+                }
+              });
+            }
 
-						scope.$on('us-spinner:stop', function (event, key) {
-							if (key === scope.key) {
-								scope.stop();
-							}
-						});
+            scope.$on('us-spinner:spin', function (event, key) {
+              if (key === scope.key) {
+                scope.spin();
+              }
+            });
 
-						scope.$on('$destroy', function () {
-							scope.stop();
-							scope.spinner = null;
-						});
-					}
-				};
-			}]);
-	}
+            scope.$on('us-spinner:stop', function (event, key) {
+              if (key === scope.key) {
+                scope.stop();
+              }
+            });
 
-	if (typeof define === 'function' && define.amd) {
-		/* AMD module */
-		define(['angular', 'spin'], factory);
-	} else {
-		/* Browser global */
-		factory(root.angular);
-	}
-}(window));
+            scope.$on('$destroy', function () {
+              scope.stop();
+              scope.spinner = null;
+            });
+          }
+        };
+      }]);
+  }
+
+    if ((typeof module === 'object') && module.exports) {
+    /* CommonJS module */
+    module.exports = factory(require('angular'), require('spin.js'));
+  } else if (typeof define === 'function' && define.amd) {
+    /* AMD module */
+    define(['angular', 'spin'], factory);
+  } else {
+    /* Browser global */
+    factory(root.angular, root.Spinner);
+  }
+}(this));

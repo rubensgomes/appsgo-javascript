@@ -18,7 +18,7 @@
     'use strict';
 
     // creates the appCore module
-    var appCore = angular.module('appCore', [ 'angularSpinner' ]);
+    var appCore = angular.module('appCore', []);
 
 
 })();
