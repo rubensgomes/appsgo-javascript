@@ -154,13 +154,25 @@
 
   </div><!-- /page -->
 
+  <!-- JavaScript Section (begin)  -->
+
+  <!--  Define global CONTEXT_PATH variable. Substitution during build -->
+  <script type="text/javascript">
+  //<![CDATA[
+    var CONTEXT_PATH = '@@CONTEXT_PATH@@';
+  //]]>
+  </script>
+
+  <!-- Add features not supported by the browser -->
+  <script src="scripts/third-party/polyfill.js"></script>
+
   <!-- jQuery -->
   <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 
   <!-- jQuery Mobile -->
   <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
-  <!--AngularJS JavaScript-->
+  <!--AngularJS -->
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-touch.js"></script>
@@ -168,13 +180,6 @@
 
   <!--Loading spinner JavaScript-->
   <script src="http://fgnass.github.io/spin.js/spin.js"></script>
-
-  <!--  define global CONTEXT_PATH variable. Substitution during build -->
-  <script type="text/javascript">
-  //<![CDATA[
-    var CONTEXT_PATH = '@@CONTEXT_PATH@@';
-  //]]>
-  </script>
 
   <!-- build:js scripts/scripts.js -->
   <script src="scripts/app.js"></script>
@@ -210,6 +215,8 @@
   })();
   //]]>
 </script>
+
+  <!-- JavaScript Section (end)  -->
 
 </body>
 </html>
