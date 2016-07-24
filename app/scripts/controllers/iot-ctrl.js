@@ -30,6 +30,8 @@
      * The IoT controller provides a REST call to retrieve past temperature
      * readings from Rubens IoT RESTful service.
      *
+     * @param {$timeout}
+     *            $timeout - the window timeout object.
      * @param {$LogProvider}
      *            $log - the object used for logging.
      * @param {$RootScopeProvider}
@@ -47,7 +49,7 @@
      *            the global angular constant object defined inside the
      *            'appConstants' module
      */
-    function IoTController($log, $rootScope, $scope, $http,
+    function IoTController($timeout, $log, $rootScope, $scope, $http,
             usSpinnerService, CONST) {
         $rootScope.title = 'IoT';
         $scope.error = '';
@@ -145,7 +147,9 @@
                 vm.duration.value;
 
             try {
-                usSpinnerService.spin('spinner-1');
+                $timeout(function() {
+                  usSpinnerService.spin('spinner-1');
+                }, 100);
                 $log.debug('Calling REST URL [' + restUrl + ']');
                 $http
                     .get(restUrl)
@@ -175,7 +179,9 @@
                 }
                 $log.error($scope.error);
             } finally {
+              $timeout(function() {
                 usSpinnerService.stop('spinner-1');
+              }, 100);
             }
         };
 
@@ -196,7 +202,7 @@
     }
 
     // Annotate the IoTController with the injectable parameters
-    IoTController.$inject = ['$log', '$rootScope', '$scope', '$http',
+    IoTController.$inject = ['$timeout', '$log', '$rootScope', '$scope', '$http',
                              'usSpinnerService', 'CONST'];
 
 })();

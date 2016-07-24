@@ -11,7 +11,7 @@
               value=""
               data-ng-model="value"
               data-ng-blur="units.doneInput(value)"
-              data-ng-keypress="($event.which === 13) ? 
+              data-ng-keypress="($event.which === 13) ?
                 units.convertMass(value, units.fromMassUnit, units.toMassUnit) : 0" />
 
     <fieldset id="selectMassUnitFieldset" class="ui-grid-a">
@@ -34,8 +34,8 @@
       <div class="ui-block-a">
         <a href="" data-role="button" data-theme="c"
              class="ui-shadow ui-btn ui-corner-all"
-             data-ng-click="units.convertMass(value, 
-                                                             units.fromMassUnit.value, 
+             data-ng-click="units.convertMass(value,
+                                                             units.fromMassUnit.value,
                                                              units.toMassUnit.value)">Convert</a>
       </div>
     </fieldset>
@@ -44,3 +44,5 @@
 
   </div>
 </form>
+
+<p><span us-spinner spinner-key="spinner-1"></span></p>

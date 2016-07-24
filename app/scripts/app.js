@@ -19,7 +19,7 @@
 
   // create and load the 'app' module
   var app = angular.module('app', [ 'ngRoute', 'ngTouch', 'ngSanitize',
-    'appRoutes','angularSpinner' ]);
+                                    'angularSpinner', 'appRoutes' ]);
 
   // Define application constants
   /* jshint ignore:start */
@@ -41,7 +41,7 @@
           request : function(config) {
             if (!config)
             {
-              throw "AngularJS config object not found!";
+              throw 'AngularJS config object not found!';
             }
 
             if (!config.url)
@@ -59,13 +59,13 @@
             var $window = $windowProvider.$get();
             if(!$window)
             {
-              throw ("AngularJS $window object not found!")
+              throw ('AngularJS $window object not found!');
             }
 
             // CONTEXT_PATH must be defined inside the index.html file.
             if(!$window.CONTEXT_PATH)
             {
-              throw ("Global CONTEXT_PATH variable not found!");
+              throw ('Global CONTEXT_PATH variable not found!');
             }
 
             if (!config.url.startsWith($window.CONTEXT_PATH))

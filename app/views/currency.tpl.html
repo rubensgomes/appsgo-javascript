@@ -4,7 +4,7 @@
     <label for="currency" class="select">US Dollar To:</label> <select
              data-ng-model="currency.currency"
              data-ng-options="c.label for c in currency.currencies track by c.value"
-             data-mini="true" 
+             data-mini="true"
              data-inline="true"
              data-ng-keypress="($event.which === 13) ? currency.toCurrency(currency.currency.value) : 0"
              data-ng-change="currency.toCurrency(currency.currency.value)">
@@ -17,4 +17,4 @@
 
 <br />
 
-<p><span data-us-spinner data-spinner-key="spinner-1"></span></p>
+<p><span us-spinner spinner-key="spinner-1"></span></p>

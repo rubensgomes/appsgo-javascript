@@ -30,6 +30,8 @@
     /**
      * The CurrencyController constructor.
      *
+     * @param {$timeout}
+     *            $timeout - the window timeout object.
      * @param {$LogProvider}
      *            $log - the object used for logging.
      * @param {$RootScopeProvider}
@@ -47,7 +49,7 @@
      *            the global angular constant object defined inside the
      *            'appConstants' module
      */
-    function CurrencyController ($log, $rootScope, $scope, $http,
+    function CurrencyController ($timeout, $log, $rootScope, $scope, $http,
             usSpinnerService, CONST) {
         $rootScope.title = 'Currency';
         $scope.error = '';
@@ -118,7 +120,9 @@
             var url = CONST.CURRENCY_REST_URL + '&prettyprint';
             try {
                 isCurrency(value);
-                usSpinnerService.spin('spinner-1');
+                $timeout(function() {
+                  usSpinnerService.spin('spinner-1');
+                }, 100);
                 $log.debug('Calling REST URL [' + url + ']');
                 $http
                     .get(url)
@@ -153,7 +157,9 @@
                 }
                 $log.error($scope.error);
             } finally {
+              $timeout(function() {
                 usSpinnerService.stop('spinner-1');
+              }, 100);
             }
         };
 
@@ -200,7 +206,7 @@
     }
 
     // annotate the controller function with the parameters to be injected
-    CurrencyController.$inject = ['$log', '$rootScope', '$scope', '$http',
+    CurrencyController.$inject = ['$timeout', '$log', '$rootScope', '$scope', '$http',
                                   'usSpinnerService', 'CONST'];
 
 })();
