@@ -24,6 +24,7 @@
   // Define application constants
   /* jshint ignore:start */
   app.constant('CONST', {
+    SPINNER_TIMEOUT : 10, // timeout in msecs to wait to start/stop spinner
     MIN_SEARCH_TEXT_LEN : 3,
     LENGTH_UNIT_REST_URL : 'http://www.rubens-gomes.com/appsgo/restportal/length/',
     MASS_UNIT_REST_URL : 'http://www.rubens-gomes.com/appsgo/restportal/weight/',

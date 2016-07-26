@@ -148,8 +148,9 @@
 
             try {
                 $timeout(function() {
+                  $log.debug('Startting loading spinner key [spinner-1]...');
                   usSpinnerService.spin('spinner-1');
-                }, 100);
+                }, CONST.SPINNER_TIMEOUT);
                 $log.debug('Calling REST URL [' + restUrl + ']');
                 $http
                     .get(restUrl)
@@ -180,8 +181,9 @@
                 $log.error($scope.error);
             } finally {
               $timeout(function() {
+                $log.debug('Stopping loading spinner key [spinner-1]...');
                 usSpinnerService.stop('spinner-1');
-              }, 100);
+              }, CONST.SPINNER_TIMEOUT);
             }
         };
 
