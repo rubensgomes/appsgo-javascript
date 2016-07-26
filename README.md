@@ -1,14 +1,18 @@
-# appsgo (AngularJS)
+# appsgo
 
 appsgo is a mobile web application that provides unit convertion
 (length, temperature, mass), currency rates, and other utilities
 (like sensor temperature at Rubens' living room).  This mobile web
 application was developed as a playground for [Rubens](http://www.rubens-gomes.com)
-to learn more about the AngularJS JavaScript framework.
+to learn more about the "AngularJS" and the completely new "Angular 2"
+JavaScript frameworks.
 
-The mobile web app is currently deployed in the following site:
+The AngularJS version of this mobile web app is currently deployed in the
+following site:
 
 http://www.rubens-gomes.com/appsgo/
+
+And the "Angular 2" version is currently under development.
 
 ## Installation
 
@@ -28,11 +32,16 @@ the following Node.js modules globally.
     npm install -g grunt
     npm install -g grunt-cli
 
-* Checkout the project from my GitHub:
+## Code Set Up
+
+* Checkout the project from my GitHub below.  Notice that under appsgo there is
+an "AngularJS" and "Angular 2" version of the same application.  Currently, the
+"Angular 2" version is under development.
 
 https://github.com/rubensgomes/appsgo
 
-* Create a "secret.json" file with the following information:
+* Change to appropriate folder (angularjs or angular2), and create a
+"secret.json" file with the following information:
 ```
 {
     "host" : "<deployment server>",
