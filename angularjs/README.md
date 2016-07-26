@@ -3,8 +3,9 @@
 appsgo is a mobile web application that provides unit convertion
 (length, temperature, mass), currency rates, and other utilities
 (like sensor temperature at Rubens' living room).  This mobile web
-application was developed as a playground for [Rubens](http://www.rubens-gomes.com)
-to learn more about the AngularJS JavaScript framework.
+application was initially developed as a playground for
+[Rubens](http://www.rubens-gomes.com)
+to learn more about the Google's "AngularJS" JavaScript framework.
 
 The mobile web app is currently deployed in the following site:
 
