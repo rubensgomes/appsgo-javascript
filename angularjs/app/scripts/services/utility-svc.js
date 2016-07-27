@@ -114,10 +114,17 @@
             throw new TypeError(msg);
           }
 
-          var elem = $document.find(element_id);
-          if( !elem )
+          var dom_elem = $document.find(element_id);
+          if( !dom_elem )
           {
             $log.error('element with id [' + element_id +
+              '] not found in the current page DOM.');
+          }
+
+          var elem = angular.element(dom_elem);
+          if( !elem )
+          {
+            $log.error('angular element with id [' + element_id +
               '] not found in the current page DOM.');
           }
 
@@ -144,6 +151,7 @@
               throw new TypeError('$window.SPINNER global variable not found.');
             }
 
+            $log.debug("Starting spinner now...");
             spinner.spin(elem);
         }
 
@@ -167,6 +175,7 @@
               throw TypeError('$window.SPINNER global variable not found.');
             }
 
+            $log.debug("Stopping spinner now...")
             spinner.stop(elem);
         }
 
