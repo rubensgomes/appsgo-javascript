@@ -18,14 +18,15 @@
   'use strict';
 
   // create and load the 'app' module
-  var app = angular.module('app', [ 'ngRoute', 'ngTouch', 'ngSanitize',
-                                    'angularSpinner', 'appRoutes' ]);
+  var app = angular.module('app', [ 'ngRoute', 'ngSanitize', 'appRoutes' ]);
 
   // Define application constants
   /* jshint ignore:start */
   app.constant('CONST', {
     SPINNER_TIMEOUT : 10, // timeout in msecs to wait to start/stop spinner
+    MIN_ELEMENT_TEXT_LEN : 1,
     MIN_SEARCH_TEXT_LEN : 3,
+    CURRENCY_SPINNER_ID : 'currency_spinner',
     LENGTH_UNIT_REST_URL : 'http://www.rubens-gomes.com/appsgo/restportal/length/',
     MASS_UNIT_REST_URL : 'http://www.rubens-gomes.com/appsgo/restportal/weight/',
     TEMPERATURE_UNIT_REST_URL : 'http://www.rubens-gomes.com/appsgo/restportal/temperature/',

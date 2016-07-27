@@ -42,15 +42,12 @@
      *            between this controller and the view.
      * @param {$HttpProvider}
      *            $http - the object used to make HTTP calls to REST services.
-     * @param usSpinnerService -
-     *            the object used to show a spinner on the GUI while certain
-     *            lengthy calls are being executed.
      * @param CONST -
      *            the global angular constant object defined inside the
      *            'appConstants' module
      */
     function IoTController($timeout, $log, $rootScope, $scope, $http,
-            usSpinnerService, CONST) {
+            CONST) {
         $rootScope.title = 'IoT';
         $scope.error = '';
 
@@ -147,10 +144,6 @@
                 vm.duration.value;
 
             try {
-                $timeout(function() {
-                  $log.debug('Startting loading spinner key [spinner-1]...');
-                  usSpinnerService.spin('spinner-1');
-                }, CONST.SPINNER_TIMEOUT);
                 $log.debug('Calling REST URL [' + restUrl + ']');
                 $http
                     .get(restUrl)
@@ -180,10 +173,6 @@
                 }
                 $log.error($scope.error);
             } finally {
-              $timeout(function() {
-                $log.debug('Stopping loading spinner key [spinner-1]...');
-                usSpinnerService.stop('spinner-1');
-              }, CONST.SPINNER_TIMEOUT);
             }
         };
 
@@ -205,6 +194,6 @@
 
     // Annotate the IoTController with the injectable parameters
     IoTController.$inject = ['$timeout', '$log', '$rootScope', '$scope', '$http',
-                             'usSpinnerService', 'CONST'];
+                             'CONST'];
 
 })();

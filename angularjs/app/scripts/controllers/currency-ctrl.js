@@ -29,28 +29,10 @@
 
     /**
      * The CurrencyController constructor.
-     *
-     * @param {$timeout}
-     *            $timeout - the window timeout object.
-     * @param {$LogProvider}
-     *            $log - the object used for logging.
-     * @param {$RootScopeProvider}
-     *            $rootScope - the global and unique scope object that used to
-     *            configure the page title.
-     * @param {Scope}
-     *            $scope - the application model object where state is shared
-     *            between this controller and the view.
-     * @param {$HttpProvider}
-     *            $http - the object used to make HTTP calls to REST services.
-     * @param usSpinnerService -
-     *            the object used to show a spinner on the GUI while certain
-     *            lengthy calls are being executed.
-     * @param CONST -
-     *            the global angular constant object defined inside the
-     *            'appConstants' module
      */
-    function CurrencyController ($timeout, $log, $rootScope, $scope, $http,
-            usSpinnerService, CONST) {
+    function CurrencyController ($window, $timeout, $log, $rootScope, $scope,
+        $http, CONST, utilSvc) {
+
         $rootScope.title = 'Currency';
         $scope.error = '';
         $scope.result = '';
@@ -120,11 +102,11 @@
             var url = CONST.CURRENCY_REST_URL + '&prettyprint';
             try {
                 isCurrency(value);
-                $timeout(function() {
-                  $log.debug('Startting loading spinner key [spinner-1]...');
-                  usSpinnerService.spin('spinner-1');
-                }, CONST.SPINNER_TIMEOUT);
+                $log.debug('Start spinner on div ID [' +
+                    CONST.CURRENCY_SPINNER_ID+ ']');
+                utilSvc.startSpinner(CONST.CURRENCY_SPINNER_ID);
                 $log.debug('Calling REST URL [' + url + ']');
+
                 $http
                     .get(url)
                     .success( function(data) {
@@ -135,7 +117,9 @@
                           $log.debug('REST call succeeded.');
                           $scope.result = 'U.S. $1.00 = ' +
                               data.rates['' + value] + ' ' + value;
+                          $log.debug('result [' + $scope.result);
                           $scope.date = new Date(data.timestamp * 1000);
+                          $log.debug('date [' + $scope.date);
                         }
                     })
                     .error( function(data, status) {
@@ -158,10 +142,17 @@
                 }
                 $log.error($scope.error);
             } finally {
-              $timeout(function() {
-                $log.debug('Stopping loading spinner key [spinner-1]...');
-                usSpinnerService.stop('spinner-1');
-              }, CONST.SPINNER_TIMEOUT);
+              $log.debug('Stop spinner on div ID [' +
+                  CONST.CURRENCY_SPINNER_ID + ']');
+              try {
+                utilSvc.stopSpinner(CONST.CURRENCY_SPINNER_ID);
+              }
+              catch(err) {
+                if(err && err.message)
+                {
+                  $log.error(err.message);
+                }
+              }
             }
         };
 
@@ -208,7 +199,7 @@
     }
 
     // annotate the controller function with the parameters to be injected
-    CurrencyController.$inject = ['$timeout', '$log', '$rootScope', '$scope', '$http',
-                                  'usSpinnerService', 'CONST'];
+    CurrencyController.$inject = ['$window', '$timeout', '$log', '$rootScope',
+                                  '$scope', '$http','CONST', 'utilSvc'];
 
 })();

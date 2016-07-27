@@ -40,16 +40,14 @@
      *            between this controller and the view.
      * @param {$HttpProvider}
      *            $http - the object used to make HTTP calls to REST services.
-     * @param usSpinnerService
-     *            $usSpinnerService - the spinner service
-     * @param utilityService-
+     * @param utilSvc-
      *            a utility object to perform some miscellaneous operations.
      * @param CONST -
      *            the global angular constant object defined inside the
      *            'appConstants' module
      */
     function UnitsController ($timeout, $log, $rootScope, $scope, $http,
-        usSpinnerService, utilityService, CONST) {
+        utilSvc, CONST) {
         $rootScope.title = 'Units';
         $scope.error = '';
         $scope.result = '';
@@ -61,7 +59,7 @@
             $scope.result = '';
 
             try {
-                utilityService.isNumber(value);
+                utilSvc.isNumber(value);
             } catch (err) {
                 $scope.error = err.message;
             }
@@ -103,11 +101,7 @@
             var url = CONST.LENGTH_UNIT_REST_URL + toUnit +
               '?from_unit=' + fromUnit + '&from_value=' + value;
             try {
-                utilityService.isNumber(value);
-                $timeout(function() {
-                  $log.debug('Startting loading spinner key [spinner-1]...');
-                  usSpinnerService.spin('spinner-1');
-                }, CONST.SPINNER_TIMEOUT);
+                utilSvc.isNumber(value);
                 $log.debug('Calling REST URL [' + url + ']');
                 $http
                     .get(url)
@@ -133,10 +127,6 @@
                 $log.error($scope.error);
             }
             finally {
-              $timeout(function() {
-                $log.debug('Stopping loading spinner key [spinner-1]...');
-                usSpinnerService.stop('spinner-1');
-              }, CONST.SPINNER_TIMEOUT);
             }
 
         };
@@ -165,10 +155,7 @@
             $scope.result = '';
 
             try {
-                utilityService.isNumber(value);
-                $timeout(function() {
-                  usSpinnerService.spin('spinner-1');
-                }, 100);
+                utilSvc.isNumber(value);
                 var url = CONST.MASS_UNIT_REST_URL + toUnit +
                     '?from_unit=' + fromUnit + '&from_value=' + value;
                 $log.debug('Calling REST URL [' + url + ']');
@@ -188,9 +175,6 @@
                 $scope.error = err.message;
             }
             finally {
-              $timeout(function() {
-                usSpinnerService.spin('spinner-1');
-              }, 100);
             }
         };
 
@@ -201,10 +185,7 @@
             $scope.result = '';
 
             try {
-                utilityService.isNumber(value);
-                $timeout(function() {
-                  usSpinnerService.spin('spinner-1');
-                }, 100);
+                utilSvc.isNumber(value);
                 var url = CONST.TEMPERATURE_UNIT_REST_URL +
                     'degF?from_unit=degC&from_value=' + value;
                 $log.debug('Calling REST URL [' + url + ']');
@@ -224,9 +205,6 @@
                 $scope.error = err.message;
             }
             finally {
-              $timeout(function() {
-                usSpinnerService.spin('spinner-1');
-              }, 100);
             }
         };
 
@@ -235,10 +213,7 @@
             $scope.result = '';
 
             try {
-                utilityService.isNumber(value);
-                $timeout(function() {
-                  usSpinnerService.spin('spinner-1');
-                }, 100);
+                utilSvc.isNumber(value);
                 var url = CONST.TEMPERATURE_UNIT_REST_URL +
                     'degC?from_unit=degF&from_value=' + value;
                 $http
@@ -257,9 +232,6 @@
                 $scope.error = err.message;
             }
             finally {
-              $timeout(function() {
-                usSpinnerService.spin('spinner-1');
-              }, 100);
             }
         };
 
@@ -267,5 +239,5 @@
 
     // annotate the UnitsController with the injectable parameters
     UnitsController.$inject = ['$timeout', '$log', '$rootScope', '$scope', '$http',
-                               'usSpinnerService', 'utilityService', 'CONST'];
+                               'utilSvc', 'CONST'];
 })();

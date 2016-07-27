@@ -22,23 +22,18 @@
     var app = angular.module('app');
 
     // registers a factory utiltyService with app
-    app.factory('utilityService', utilityService);
+    app.factory('utilSvc', utilSvc);
 
     /**
      * The utiltyService factory.
-     *
-     * @param {$LogProvider}
-     *            $log - the object used for logging.
-     * @param {$HttpProvider}
-     *            $http - the object used to make HTTP calls to REST services.
-     * @param CONST -
-     *            the global angular constant object defined inside the
-     *            "appConstants" module
      */
-    function utilityService($log, $http, CONST) {
+    function utilSvc($window, $document, $log, $http, CONST) {
         var service = {
                 isNumber : isNumber,
-                isSearchText : isSearchText
+                isSearchText : isSearchText,
+                getElementById : getElementById,
+                startSpinner : startSpinner,
+                stopSpinner : stopSpinner
         };
 
         return service;
@@ -94,9 +89,91 @@
             $log.debug('[' + value + '] is a valid search text');
         }
 
+        /**
+         * Returns the page DOM element for the given ID.
+         *
+         * @throws TypeError if element value given is not right type
+         */
+        function getElementById(value) {
+          $log.debug('checking if [' + value +
+              '] is found in the current page DOM');
+
+          if (angular.isUndefined(value) || value === null)
+          {
+            msg = 'argument given is not a text';
+            $log.error(msg);
+            throw new TypeError(msg);
+          }
+
+          var element_id = $.trim(value);
+          if(element_id.length < CONST.MIN_ELEMENT_TEXT_LEN)
+          {
+            msg = 'argument given needs to have at least [' +
+              CONST.MIN_ELEMENT_TEXT_LEN + '] characters';
+            $log.error(msg);
+            throw new TypeError(msg);
+          }
+
+          var elem = $document.find(element_id);
+          if( !elem )
+          {
+            $log.error('element with id [' + element_id +
+              '] not found in the current page DOM.');
+          }
+
+          return elem;
+        }
+
+        /**
+         * Spins the spinner in the location defined by the given DOM element
+         * id.
+         *
+         * @param {string} -  The element id.  It should look like "#divId"
+         */
+        function startSpinner(value) {
+            var elem = getElementById(value);
+            if( !elem )
+            {
+              throw new Error('element with id [' + element_id +
+                  '] not found in the current page DOM.');
+            }
+
+            var spinner = $window.SPINNER;
+            if(!spinner)
+            {
+              throw new TypeError('$window.SPINNER global variable not found.');
+            }
+
+            spinner.spin(elem);
+        }
+
+        /**
+         * Stops the spinner in the location defined by the given DOM element
+         * id.
+         *
+         * @param {string} -  The element id.  It should look like "#divId"
+         */
+        function stopSpinner(value) {
+            var elem = getElementById(value);
+            if( !elem )
+            {
+              throw Error('element with id [' + element_id +
+                  '] not found in the current page DOM.');
+            }
+
+            var spinner = $window.SPINNER;
+            if(!spinner)
+            {
+              throw TypeError('$window.SPINNER global variable not found.');
+            }
+
+            spinner.stop(elem);
+        }
+
+
     }
 
     // annotates the injectable parameters
-    utilityService.$inject = ['$log', '$http', 'CONST'];
+    utilSvc.$inject = ['$window', '$document', '$log', '$http', 'CONST'];
 
 })();

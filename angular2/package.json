@@ -1,0 +1,45 @@
+{
+  "name": "appsgo",
+  "version": "0.1.0",
+  "description": "mobile webapp developed using AngularJS",
+  "license": "UNLICENSED",
+  "main": "Gruntfile.js",
+  "author": "Rubens S. Gomes <rubens.s.gomes@gmail.com> (http://www.rubens-gomes.com/)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rubensgomes/appsgo.git"
+  },
+  "directories": {
+    "app": "app",
+    "misc": "misc",
+    "dist": "dist"
+  },
+  "keywords": [
+    "appsgo",
+    "AngularJS"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-connect": "^1.0.2",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-cssmin": "^1.0.1",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-contrib-uglify": "^2.0.0",
+    "grunt-string-replace": "^1.3.0-beta.1",
+    "grunt-filerev": "^2.3.1",
+    "grunt-newer": "^1.2.0",
+    "grunt-ssh": "^0.12.9",
+    "grunt-usemin": "3.0.0",
+    "jshint-stylish": "^1.0.0",
+    "load-grunt-tasks": "^1.0.0",
+    "time-grunt": "^1.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/rubensgomes/appsgo/issues"
+  },
+  "homepage": "https://github.com/rubensgomes/AppsGo.mobi"
+}

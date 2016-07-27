@@ -154,13 +154,6 @@
 
   <!-- JavaScript Section (begin)  -->
 
-  <!--  Define global CONTEXT_PATH variable. Substitution during build -->
-  <script type="text/javascript">
-  //<![CDATA[
-    var CONTEXT_PATH = '@@CONTEXT_PATH@@';
-  //]]>
-  </script>
-
   <!-- jQuery -->
   <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 
@@ -170,16 +163,47 @@
   <!--AngularJS -->
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-touch.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-sanitize.js"></script>
 
   <!--Loading spinner JavaScript-->
   <script src="http://fgnass.github.io/spin.js/spin.js"></script>
 
+  <!--  Define global variables shared in the application:
+     CONTEXT_PATH variable. Substitution during build
+     SPINNER to draw spinner while loading resources.
+   -->
+  <script type="text/javascript">
+  //<![CDATA[
+    var CONTEXT_PATH = '@@CONTEXT_PATH@@';
+	var SPINNER_OPTS = {
+	  lines: 13 // The number of lines to draw
+	, length: 28 // The length of each line
+	, width: 14 // The line thickness
+	, radius: 42 // The radius of the inner circle
+	, scale: 1 // Scales overall size of the spinner
+	, corners: 1 // Corner roundness (0..1)
+	, color: '#000' // #rgb or #rrggbb or array of colors
+	, opacity: 0.25 // Opacity of the lines
+	, rotate: 0 // The rotation offset
+	, direction: 1 // 1: clockwise, -1: counterclockwise
+	, speed: 1 // Rounds per second
+	, trail: 60 // Afterglow percentage
+	, fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
+	, zIndex: 2e9 // The z-index (defaults to 2000000000)
+	, className: 'spinner' // The CSS class to assign to the spinner
+	, top: '50%' // Top position relative to parent
+	, left: '50%' // Left position relative to parent
+	, shadow: false // Whether to render a shadow
+	, hwaccel: false // Whether to use hardware acceleration
+	, position: 'absolute' // Element positioning
+	}
+    var SPINNER = new Spinner(SPINNER_OPTS);
+  //]]>
+  </script>
+
   <!-- build:js scripts/scripts.js -->
   <script src="scripts/third-party/polyfill.js"></script>
   <script src="scripts/third-party/spin.js"></script>
-  <script src="scripts/third-party/angular-spinner.js"></script>
   <script src="scripts/app.js"></script>
   <script src="scripts/app-routes.js"></script>
   <script src="scripts/controllers/currency-ctrl.js"></script>
