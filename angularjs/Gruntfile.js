@@ -54,42 +54,51 @@ module.exports = function(grunt)
     },
 
     // grunt-contrib-copy: Copies HTML, CSS and image files to dist folder
-    // do not copy index.html because it is being handled by string-replace
-    // For deployment builds:
-    // - do not copy main.css because it is being handled by usemin
     copy :
     {
-      serve :
+      scripts : // used prior to start server locally
       {
-        files : [{
-          expand : true,
-          cwd : '<%= config.app %>',
-          dest : '<%= config.dist %>',
-          src : [ '*.{html,ico,txt}',
-                  '!index.html',
-                  'images/{,*/}*.{jpg,png}',
-                  'scripts/{,*/}*.js',
-                  'styles/{,*/}*.css',
-                  'themes/{,*/}*.{css,gif,jpg,png}',
-                  'views/{,*/}*.html']
-         }]
+          files:[{
+            expand : true,
+            cwd : '<%= config.app %>',
+            dest : '<%= config.dist %>',
+            src : [ 'scripts/**/*.js' ]
+          }]
       },
-      deploy :
+      css_html_images:
+      {
+          files: [{
+            expand : true,
+            cwd : '<%= config.app %>',
+            dest : '<%= config.dist %>',
+            // do not copy index.html, it is being handled by string-replace
+            src : [ '**/*.{css,html,txt,gif,jpg,png,ico}',
+                    '!index.html']
+          }]
+      },
+      deploy_all : // deploy all files
       {
         files : [{
           expand : true,
-          dot : true,
           cwd : '<%= config.app %>',
           dest : '<%= config.dist %>',
-          src : [ '*.{html,ico,txt}',
+          // do not copy index.html, it is being handled by string-replace
+          src : [ '**/*.{js,css,html,txt,gif,jpg,png,ico}',
+                  '!index.html']
+        }],
+      },
+      deploy_min : // deploy all files minified
+      {
+        files : [{
+          expand : true,
+          cwd : '<%= config.app %>',
+          dest : '<%= config.dist %>',
+          // do not copy index.html, it is being handled by string-replace
+          // do not copy main.css, it is being handled by usemin
+          src : [ '**/*.{css,html,txt,gif,jpg,png,ico}',
                   '!index.html',
-                  '.htaccess',
-                  'images/{,*/}*.{jpg,png}',
-                  'styles/{,*/}*.{css}',
-                  '!styles/main.css',
-                  'themes/{,*/}*.{css,gif,jpg,png}',
-                  'views/{,*/}*.html']
-         }]
+                  '!styles/main.css']
+        }]
       }
     },
 
@@ -127,7 +136,7 @@ module.exports = function(grunt)
     // grunt-string-replace: replace @@BASE@@ in the index.html file
     'string-replace' :
     {
-      serve :
+      local :
       {
         files: [{
           src: '<%= config.app %>/index.html',
@@ -190,7 +199,7 @@ module.exports = function(grunt)
     {
       clean :
       {
-        // command to run on Rubens' VM server (softlagos.com)
+        // command to run on Rubens' VM server
         command : 'cd <%= config.deployFolder %> && rm -fr *'
       },
       options :
@@ -231,13 +240,13 @@ module.exports = function(grunt)
       scripts :
       {
         files : [ '<%= config.app %>/scripts/{,*/}*.js' ],
-        tasks : [ 'newer:jshint:all' ],
+        tasks : [ 'newer:jshint:all', 'newer:copy:scripts' ],
         options :
         {
           livereload : '<%= connect.server.options.livereload %>'
         }
       },
-      configFiles :
+      config_files :
       {
         files : [ 'Gruntfile.js' ],
         options :
@@ -245,42 +254,54 @@ module.exports = function(grunt)
           reload : true
         }
       },
-      livereload :
+      css_html_images :
       {
-        files : [ '<%= config.app %>/{,*/}*.html',
-                  '.tmp/styles/{,*/}*.css',
-                  '<%= config.app %>/images/{,*/}*.{gif,jpg,png}' ],
+        files : [ '<%= config.app %>/{,*/}*.{css,html,gif,jpg,png}' ],
+        tasks : [  'newer:copy:css_html_images' ],
         options :
         {
           livereload : '<%= connect.server.options.livereload %>'
         }
       }
     }
-
   });
 
   // build used to start local server
   grunt.registerTask('localBuild',
       [ 'clean',
-          'string-replace:serve',
-          'copy:serve']);
+          'string-replace:local',
+          'copy:scripts',
+          'copy:css_html_images']);
 
-  // build used for deployment
-  grunt.registerTask('deployBuild',
+  // run server locally
+  grunt.registerTask('serve',
+      [ 'localBuild',
+        'connect:server',
+        'watch' ]);
+
+  // deployment build all files in clean state (no minification)
+  grunt.registerTask('deployAllBuild',
+      [ 'clean',
+          'string-replace:deploy',
+          'copy:deploy_all' ]);
+  grunt.registerTask('deployAll',
+      [ 'deployAllBuild',
+          'sshexec:clean',
+          'sftp:copy' ]);
+
+  // deployment build with files minified
+  grunt.registerTask('deployMinBuild',
       [ 'clean',
           'useminPrepare',
           'string-replace:deploy',
-          'copy:deploy',
+          'copy:deploy_min',
           'concat:generated',
           'cssmin:generated',
           'uglify:generated',
           'filerev',
-          'usemin']);
-
-  grunt.registerTask('deploy',
-      [ 'deployBuild', 'sshexec:clean', 'sftp:copy' ]);
-
-  grunt.registerTask('serve',
-      [ 'localBuild', 'connect:server', 'watch' ]);
-
+          'usemin' ]);
+  grunt.registerTask('deployMin',
+      [ 'deployMinBuild',
+          'sshexec:clean',
+          'sftp:copy' ]);
 };
