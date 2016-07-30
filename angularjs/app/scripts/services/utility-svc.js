@@ -27,7 +27,7 @@
     /**
      * The utiltyService factory.
      */
-    function utilSvc($window, $document, $log, $http, CONST) {
+    function utilSvc($document, $log, $http, CONST) {
         var service = {
                 isNumber : isNumber,
                 isSearchText : isSearchText,
@@ -145,14 +145,13 @@
                   '] not found in the current page DOM.');
             }
 
-            var spinner = $window.SPINNER;
-            if(!spinner)
+            if(!CONST.SPINNER)
             {
-              throw new TypeError('$window.SPINNER global variable not found.');
+              throw new TypeError('CONST.SPINNER global variable not found.');
             }
 
             $log.debug("Starting spinner now...");
-            spinner.spin(elem);
+            CONST.SPINNER.spin(elem);
         }
 
         /**
@@ -169,20 +168,19 @@
                   '] not found in the current page DOM.');
             }
 
-            var spinner = $window.SPINNER;
-            if(!spinner)
+            if(!CONST.SPINNER)
             {
-              throw TypeError('$window.SPINNER global variable not found.');
+              throw TypeError('CONST.SPINNER global variable not found.');
             }
 
             $log.debug("Stopping spinner now...")
-            spinner.stop(elem);
+            CONST.SPINNER.stop(elem);
         }
 
 
     }
 
     // annotates the injectable parameters
-    utilSvc.$inject = ['$window', '$document', '$log', '$http', 'CONST'];
+    utilSvc.$inject = ['$document', '$log', '$http', 'CONST'];
 
 })();
