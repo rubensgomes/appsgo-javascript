@@ -172,7 +172,9 @@
                 	$scope.error += ' : ' + err.message;
                 }
                 $log.error($scope.error);
-            } finally {
+            }
+            finally {
+              $log.debug('finally block called.');
             }
         };
 

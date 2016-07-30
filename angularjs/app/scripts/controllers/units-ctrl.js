@@ -127,6 +127,7 @@
                 $log.error($scope.error);
             }
             finally {
+              $log.debug('finally block called.');
             }
 
         };
@@ -175,6 +176,7 @@
                 $scope.error = err.message;
             }
             finally {
+              $log.debug('finally block called.');
             }
         };
 
@@ -205,6 +207,7 @@
                 $scope.error = err.message;
             }
             finally {
+              $log.debug('finally block called.');
             }
         };
 
@@ -232,6 +235,7 @@
                 $scope.error = err.message;
             }
             finally {
+              $log.debug('finally block called.');
             }
         };
 

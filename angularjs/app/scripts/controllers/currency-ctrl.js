@@ -102,9 +102,9 @@
             var url = CONST.CURRENCY_REST_URL + '&prettyprint';
             try {
                 isCurrency(value);
-                $log.debug('Start spinner on div ID [' +
-                    CONST.CURRENCY_SPINNER_ID+ ']');
-                utilSvc.startSpinner(CONST.CURRENCY_SPINNER_ID);
+                $log.debug('Start spinner key [' +
+                    CONST.DEFAULT_SPINNER_ID + ']');
+                utilSvc.startSpinner(CONST.DEFAULT_SPINNER_ID);
                 $log.debug('Calling REST URL [' + url + ']');
 
                 $http
@@ -142,10 +142,10 @@
                 }
                 $log.error($scope.error);
             } finally {
-              $log.debug('Stop spinner on div ID [' +
-                  CONST.CURRENCY_SPINNER_ID + ']');
+              $log.debug('Stop spinner on key [' +
+                  CONST.DEFAULT_SPINNER_ID + ']');
               try {
-                utilSvc.stopSpinner(CONST.CURRENCY_SPINNER_ID);
+                utilSvc.stopSpinner(CONST.DEFAULT_SPINNER_ID);
               }
               catch(err) {
                 if(err && err.message)

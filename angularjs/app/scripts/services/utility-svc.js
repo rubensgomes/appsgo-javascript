@@ -27,7 +27,7 @@
     /**
      * The utiltyService factory.
      */
-    function utilSvc($document, $log, $http, CONST) {
+    function utilSvc($document, $log, $http, usSpinnerService, CONST) {
         var service = {
                 isNumber : isNumber,
                 isSearchText : isSearchText,
@@ -92,12 +92,14 @@
         /**
          * Returns the page DOM element for the given ID.
          *
-         * @throws TypeError if element value given is not right type
+         * @param {string} -- the div dom id
+         * @throws {TypeError} -- if element value given is not right type
          */
         function getElementById(value) {
           $log.debug('checking if [' + value +
               '] is found in the current page DOM');
 
+          var msg;
           if (angular.isUndefined(value) || value === null)
           {
             msg = 'argument given is not a text';
@@ -132,55 +134,48 @@
         }
 
         /**
-         * Spins the spinner in the location defined by the given DOM element
-         * id.
+         * Spins the spinner using angular-spinner
          *
-         * @param {string} -  The element id.  It should look like "#divId"
+         * @param {string} -- the spinner html key
          */
-        function startSpinner(value) {
-            var elem = getElementById(value);
-            if( !elem )
-            {
-              throw new Error('element with id [' + element_id +
-                  '] not found in the current page DOM.');
-            }
+        function startSpinner(key) {
+          $log.debug('checking if spinner [' + key +
+            '] was provided.');
 
-            if(!CONST.SPINNER)
-            {
-              throw new TypeError('CONST.SPINNER global variable not found.');
-            }
+          var msg;
+          if (angular.isUndefined(key) || key === null)
+          {
+            msg = 'argument given is not a text';
+            $log.error(msg);
+            throw new TypeError(msg);
+          }
 
-            $log.debug("Starting spinner now...");
-            CONST.SPINNER.spin(elem);
+          usSpinnerService.spin(key);
         }
 
         /**
-         * Stops the spinner in the location defined by the given DOM element
-         * id.
+         * Stops the spinner using angular-spinner.
          *
-         * @param {string} -  The element id.  It should look like "#divId"
+         * @param {string} -- the spinner html key
          */
-        function stopSpinner(value) {
-            var elem = getElementById(value);
-            if( !elem )
-            {
-              throw Error('element with id [' + element_id +
-                  '] not found in the current page DOM.');
-            }
+        function stopSpinner(key) {
+          $log.debug('checking if spinner [' + key +
+          '] was provided.');
 
-            if(!CONST.SPINNER)
-            {
-              throw TypeError('CONST.SPINNER global variable not found.');
-            }
+          var msg;
+          if (angular.isUndefined(key) || key === null)
+          {
+            msg = 'argument given is not a text';
+            $log.error(msg);
+            throw new TypeError(msg);
+          }
 
-            $log.debug("Stopping spinner now...")
-            CONST.SPINNER.stop(elem);
+          usSpinnerService.stop(key);
         }
-
 
     }
 
     // annotates the injectable parameters
-    utilSvc.$inject = ['$document', '$log', '$http', 'CONST'];
+    utilSvc.$inject = ['$document', '$log', '$http', 'usSpinnerService', 'CONST'];
 
 })();
