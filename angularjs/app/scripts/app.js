@@ -27,10 +27,10 @@
     DEFAULT_SPINNER_ID : 'spinner-1',
     MIN_ELEMENT_TEXT_LEN : 1,
     MIN_SEARCH_TEXT_LEN : 3,
-    LENGTH_UNIT_REST_URL : 'http://www.rubens-gomes.com/appsgo/restportal/length/',
-    MASS_UNIT_REST_URL : 'http://www.rubens-gomes.com/appsgo/restportal/weight/',
-    TEMPERATURE_UNIT_REST_URL : 'http://www.rubens-gomes.com/appsgo/restportal/temperature/',
-    TEMPERATURE_REST_URL : 'http://www.rubens-gomes.com/appsgo/restportal/analytics/temperature/sensors/000006c01f0b',
+    LENGTH_UNIT_REST_URL : 'http://api.restportal.com/length/',
+    MASS_UNIT_REST_URL : 'http://api.restportal.com/weight/',
+    TEMPERATURE_UNIT_REST_URL : 'http://api.restportal.com/temperature/',
+    TEMPERATURE_REST_URL : 'http://api.restportal.com/analytics/temperature/sensors/000006c01f0b',
     CURRENCY_REST_URL : 'https://openexchangerates.org/latest.json?app_id=30255f99fd69456d8dd50fe9af849aab'
   });
   /* jshint ignore:end */

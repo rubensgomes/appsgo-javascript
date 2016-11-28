@@ -22,6 +22,10 @@ proper running of "node" and "npm".
     node -v
     npm -v
 
+* Open a shell command prompt, and run the following command to install the
+angular cli module globally.
+     npm install -g angular-cli
+
 * Open a shell command prompt, and run the following commands to install
 the following Node.js modules globally.
 
