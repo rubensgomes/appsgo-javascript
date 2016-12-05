@@ -52,7 +52,7 @@
     MASS_UNIT_REST_URL : 'http://www.rubens-gomes.com/appsgo/restportal/weight/',
     TEMPERATURE_UNIT_REST_URL : 'http://www.rubens-gomes.com/appsgo/restportal/temperature/',
     TEMPERATURE_REST_URL : 'http://www.rubens-gomes.com/appsgo/restportal/analytics/temperature/sensors/000006c01f0b',
-    CURRENCY_REST_URL : 'https://openexchangerates.org/latest.json?app_id=30255f99fd69456d8dd50fe9af849aab'
+    CURRENCY_REST_URL : 'http://openexchangerates.org/api/latest.json?app_id=30255f99fd69456d8dd50fe9af849aab&prettyprint'
   });
   /* jshint ignore:end */
 
