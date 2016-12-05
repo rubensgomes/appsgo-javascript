@@ -22,15 +22,36 @@
                                     'ngSanitize', 'appRoutes' ]);
 
   // Define application constants
+  /**
+   * ATTENTION:  CORS (Cross Origin Resource Sharing) does *NOT* work within environments
+   * (such as corporate networks) that use firewalls.  Firewalls can block CORS authorization
+   * headers which will impact on CORS requests.  That's why a PROXY approach is used below
+   * to serve the following requests.
+   * 
+   * We use the following:
+   * 
+   * LENGTH_UNIT_REST_URL : 'http://www.rubens-gomes.com/appsgo/restportal/length/',
+   * MASS_UNIT_REST_URL : 'http://www.rubens-gomes.com/appsgo/restportal/weight/',
+   * TEMPERATURE_UNIT_REST_URL : 'http://www.rubens-gomes.com/appsgo/restportal/temperature/',
+   * TEMPERATURE_REST_URL : 'http://www.rubens-gomes.com/appsgo/restportal/analytics/temperature/sensors/000006c01f0b',
+   *
+   * instead of the following:
+   * 
+   * LENGTH_UNIT_REST_URL : 'http://api.restportal.com/length/',
+   * MASS_UNIT_REST_URL : 'http://api.restportal.com/weight/',
+   * TEMPERATURE_UNIT_REST_URL : 'http://api.restportal.com/temperature/',
+   * TEMPERATURE_REST_URL : 'http://api.restportal.com/analytics/temperature/sensors/000006c01f0b',
+   * 
+   */
   /* jshint ignore:start */
   app.constant('CONST', {
     DEFAULT_SPINNER_ID : 'spinner-1',
     MIN_ELEMENT_TEXT_LEN : 1,
     MIN_SEARCH_TEXT_LEN : 3,
-    LENGTH_UNIT_REST_URL : 'http://api.restportal.com/length/',
-    MASS_UNIT_REST_URL : 'http://api.restportal.com/weight/',
-    TEMPERATURE_UNIT_REST_URL : 'http://api.restportal.com/temperature/',
-    TEMPERATURE_REST_URL : 'http://api.restportal.com/analytics/temperature/sensors/000006c01f0b',
+    LENGTH_UNIT_REST_URL : 'http://www.rubens-gomes.com/appsgo/restportal/length/',
+    MASS_UNIT_REST_URL : 'http://www.rubens-gomes.com/appsgo/restportal/weight/',
+    TEMPERATURE_UNIT_REST_URL : 'http://www.rubens-gomes.com/appsgo/restportal/temperature/',
+    TEMPERATURE_REST_URL : 'http://www.rubens-gomes.com/appsgo/restportal/analytics/temperature/sensors/000006c01f0b',
     CURRENCY_REST_URL : 'https://openexchangerates.org/latest.json?app_id=30255f99fd69456d8dd50fe9af849aab'
   });
   /* jshint ignore:end */
