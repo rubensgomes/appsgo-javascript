@@ -30,17 +30,19 @@
    * 
    * We use the following:
    * 
-   * LENGTH_UNIT_REST_URL : 'http://www.rubens-gomes.com/appsgo/restportal/length/',
-   * MASS_UNIT_REST_URL : 'http://www.rubens-gomes.com/appsgo/restportal/weight/',
-   * TEMPERATURE_UNIT_REST_URL : 'http://www.rubens-gomes.com/appsgo/restportal/temperature/',
-   * TEMPERATURE_REST_URL : 'http://www.rubens-gomes.com/appsgo/restportal/analytics/temperature/sensors/000006c01f0b',
+   * LENGTH_UNIT_REST_URL : 'http://www.rubens-gomes.com/appsgo/restportal/length/'
+   * MASS_UNIT_REST_URL : 'http://www.rubens-gomes.com/appsgo/restportal/weight/'
+   * TEMPERATURE_UNIT_REST_URL : 'http://www.rubens-gomes.com/appsgo/restportal/temperature/'
+   * TEMPERATURE_REST_URL : 'http://www.rubens-gomes.com/appsgo/restportal/analytics/temperature/sensors/000006c01f0b'
+   * CURRENCY_REST_URL : 'http://www.rubens-gomes.com/appsgo/currency/api/latest.json?app_id=30255f99fd69456d8dd50fe9af849aab&prettyprint'
    *
    * instead of the following:
    * 
-   * LENGTH_UNIT_REST_URL : 'http://api.restportal.com/length/',
-   * MASS_UNIT_REST_URL : 'http://api.restportal.com/weight/',
-   * TEMPERATURE_UNIT_REST_URL : 'http://api.restportal.com/temperature/',
-   * TEMPERATURE_REST_URL : 'http://api.restportal.com/analytics/temperature/sensors/000006c01f0b',
+   * LENGTH_UNIT_REST_URL : 'http://api.restportal.com/length/'
+   * MASS_UNIT_REST_URL : 'http://api.restportal.com/weight/'
+   * TEMPERATURE_UNIT_REST_URL : 'http://api.restportal.com/temperature/'
+   * TEMPERATURE_REST_URL : 'http://api.restportal.com/analytics/temperature/sensors/000006c01f0b'
+   * CURRENCY_REST_URL : 'http://openexchangerates.org/api/latest.json?app_id=30255f99fd69456d8dd50fe9af849aab&prettyprint'
    * 
    */
   /* jshint ignore:start */
@@ -52,7 +54,7 @@
     MASS_UNIT_REST_URL : 'http://www.rubens-gomes.com/appsgo/restportal/weight/',
     TEMPERATURE_UNIT_REST_URL : 'http://www.rubens-gomes.com/appsgo/restportal/temperature/',
     TEMPERATURE_REST_URL : 'http://www.rubens-gomes.com/appsgo/restportal/analytics/temperature/sensors/000006c01f0b',
-    CURRENCY_REST_URL : 'http://openexchangerates.org/api/latest.json?app_id=30255f99fd69456d8dd50fe9af849aab&prettyprint'
+    CURRENCY_REST_URL : 'http://www.rubens-gomes.com/appsgo/currency/api/latest.json?app_id=30255f99fd69456d8dd50fe9af849aab&prettyprint'
   });
   /* jshint ignore:end */
 
