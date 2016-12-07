@@ -267,7 +267,7 @@ module.exports = function(grunt)
   });
 
   // build used to start local server
-  grunt.registerTask('localBuild',
+  grunt.registerTask('build',
       [ 'clean',
           'string-replace:local',
           'copy:scripts',
@@ -275,7 +275,7 @@ module.exports = function(grunt)
 
   // run server locally
   grunt.registerTask('serve',
-      [ 'localBuild',
+      [ 'build',
         'connect:server',
         'watch' ]);
 
@@ -284,7 +284,7 @@ module.exports = function(grunt)
       [ 'clean',
           'string-replace:deploy',
           'copy:deploy_all' ]);
-  grunt.registerTask('deployAll',
+  grunt.registerTask('deploy',
       [ 'deployAllBuild',
           'sshexec:clean',
           'sftp:copy' ]);
