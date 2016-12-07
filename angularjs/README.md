@@ -15,7 +15,12 @@ http://www.rubens-gomes.com/appsgo/
 
 * Download and install Node.js (LTS version) from:
 
-http://nodejs.org/download/
+    http://nodejs.org/download/
+
+* Configure a user local environment variable "APPDATA" on Windows 7 as follows:
+
+    APPDATA
+    C:\Users\<user_id>\AppData\Roaming\npm;npm
 
 * Open a shell command prompt, and run the following commands to insure
 proper running of "node" and "npm".
