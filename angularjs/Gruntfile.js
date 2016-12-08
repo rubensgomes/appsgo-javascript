@@ -266,12 +266,12 @@ module.exports = function(grunt)
     }
   });
 
-  // build used to start local server
+  // *local* build used to start local server
   grunt.registerTask('build',
       [ 'clean',
-          'string-replace:local',
-          'copy:scripts',
-          'copy:css_html_images']);
+        'string-replace:local',
+        'copy:scripts',
+        'copy:css_html_images']);
 
   // run server locally
   grunt.registerTask('serve',
@@ -279,29 +279,31 @@ module.exports = function(grunt)
         'connect:server',
         'watch' ]);
 
-  // deployment build all files in clean state (no minification)
-  grunt.registerTask('deployAllBuild',
+  // package to be deployed (no minification)
+  grunt.registerTask('package',
       [ 'clean',
-          'string-replace:deploy',
-          'copy:deploy_all' ]);
-  grunt.registerTask('deploy',
-      [ 'deployAllBuild',
-          'sshexec:clean',
-          'sftp:copy' ]);
+    	'string-replace:deploy',
+    	'copy:deploy_all' ]);
 
-  // deployment build with files minified
-  grunt.registerTask('deployMinBuild',
+  // deploy (no minification)
+  grunt.registerTask('deploy',
       [ 'clean',
-          'useminPrepare',
-          'string-replace:deploy',
-          'copy:deploy_min',
-          'concat:generated',
-          'cssmin:generated',
-          'uglify:generated',
-          'filerev',
-          'usemin' ]);
+    	'string-replace:deploy',
+    	'copy:deploy_all',
+        'sshexec:clean',
+        'sftp:copy' ]);
+
+  // deploy with files minified
   grunt.registerTask('deployMin',
-      [ 'deployMinBuild',
-          'sshexec:clean',
-          'sftp:copy' ]);
+      [ 'clean',
+        'useminPrepare',
+        'string-replace:deploy',
+        'copy:deploy_min',
+        'concat:generated',
+        'cssmin:generated',
+        'uglify:generated',
+        'filerev',
+        'usemin',
+        'sshexec:clean',
+        'sftp:copy' ]);
 };
