@@ -1,17 +1,18 @@
-(function() {
+(function ()
+{
     /**
      * @file Registers the UnitsController with the app module.
-     *
-     *This controller provides the REST calls to calculate the unit conversion.
-     *
+     * 
+     * This controller provides the REST calls to calculate the unit conversion.
+     * 
      * NOTE: Javascript variables have two scopes: function and global.
-     *
+     * 
      * Notice that we are declaring self invoking anonymous function
      * expressions; that is, '(function() {...}).();'. This programming practice
      * allows any variable declared within the scope of the annonymous function
      * to be encapsulated and only visible within the scope and execution of
      * that function. Therefore, it prevents the pollution of the global scope.
-     *
+     * 
      * @author Rubens Gomes
      */
 
@@ -27,7 +28,7 @@
 
     /**
      * The UnitsController constructor.
-     *
+     * 
      * @param {$timeout}
      *            $timeout - the window timeout object.
      * @param {$LogProvider}
@@ -46,21 +47,25 @@
      *            the global angular constant object defined inside the
      *            'appConstants' module
      */
-    function UnitsController ($timeout, $log, $rootScope, $scope, $http,
-        utilSvc, CONST) {
+    function UnitsController($timeout, $log, $rootScope, $scope, $http, utilSvc, CONST)
+    {
         $rootScope.title = 'Units';
         $scope.error = '';
         $scope.result = '';
 
         var vm = this;
 
-        vm.doneInput = function(value) {
+        vm.doneInput = function (value)
+        {
             $scope.error = '';
             $scope.result = '';
 
-            try {
+            try
+            {
                 utilSvc.isNumber(value);
-            } catch (err) {
+            }
+            catch (err)
+            {
                 $scope.error = err.message;
             }
 
@@ -68,25 +73,33 @@
 
         // ------ >>> Length <<< -------
 
-        vm.lengthUnits = [ {
+        vm.lengthUnits =
+        [
+        {
             label : 'inch',
             value : 'in'
-        }, {
+        },
+        {
             label : 'foot',
             value : 'ft'
-        }, {
+        },
+        {
             label : 'yard',
             value : 'yd'
-        }, {
+        },
+        {
             label : 'mile',
             value : 'mi'
-        }, {
+        },
+        {
             label : 'milimeter',
             value : 'mm'
-        }, {
+        },
+        {
             label : 'meter',
             value : 'm'
-        }, {
+        },
+        {
             label : 'kilometer',
             value : 'km'
         } ];
@@ -94,56 +107,79 @@
         vm.fromLengthUnit = vm.lengthUnits[3]; // default
         vm.toLengthUnit = vm.lengthUnits[6]; // default
 
-        vm.convertLength = function(value, fromUnit, toUnit) {
+        vm.convertLength = function (value, fromUnit, toUnit)
+        {
             $scope.error = '';
             $scope.result = '';
 
-            var url = CONST.LENGTH_UNIT_REST_URL + toUnit +
-              '?from_unit=' + fromUnit + '&from_value=' + value;
-            try {
+            var url = CONST.LENGTH_UNIT_REST_URL + toUnit + '?from_unit=' + fromUnit + '&from_value=' + value;
+            try
+            {
                 utilSvc.isNumber(value);
                 $log.debug('Calling REST URL [' + url + ']');
-                $http
-                    .get(url)
-                    .success( function(data) {
-                        $log.debug('REST call succeeded.');
-                        $scope.result = data.data.from_value + ' ' + fromUnit +
-                            ' = ' + data.data.to_value + ' ' + toUnit;
-                    })
-                    .error(function(data) {
-                        $scope.error = 'REST call [' + url + '] failed.';
-                        if(data && data.error && data.error.message)
-                        {
-                        	$scope.error += ' : ' + data.error.message;
-                        }
-                        $log.error($scope.error);
-                    });
-            } catch (err) {
-                $scope.error = 'REST call [' + url + '] failed.';
-                if(err && err.message)
+
+                $http(
                 {
-                	$scope.error += ' : ' + err.message;
+                    method : 'GET',
+                    url : url
+                }).then(function successCallback(response)
+                {
+                    $log.debug('REST call succeeded.');
+                    if ( response.data && response.data.data )
+                    {
+                        var myData = response.data.data;
+                        $scope.result = myData.from_value + ' ' + fromUnit + 
+                            ' = ' + myData.to_value + ' ' + toUnit;
+                    }
+                    else
+                    {
+                        $log.error('response.data.data not found.')
+                    }
+                }, function errorCallback(response)
+                {
+                    $scope.error = 'REST call [' + url + '] failed.';
+                    if ( response.data && response.data.error && response.data.error.message )
+                    {
+                        $scope.error += ' : ' + response.data.error.message;
+                    }
+                    $scope.error += '. status : ' + response.status + '. error : '
+                                    + response.statusText;
+                    $log.error($scope.error);
+                });
+            }
+            catch (err)
+            {
+                $scope.error = 'REST call [' + url + '] failed.';
+                if ( err && err.message )
+                {
+                    $scope.error += ' : ' + err.message;
                 }
                 $log.error($scope.error);
             }
-            finally {
-              $log.debug('finally block called.');
+            finally
+            {
+                $log.debug('finally block called.');
             }
 
         };
 
         // ------ >>> Mass <<< -------
 
-        vm.massUnits = [ {
+        vm.massUnits =
+        [
+        {
             label : 'ounce',
             value : 'oz'
-        }, {
+        },
+        {
             label : 'pound',
             value : 'lb'
-        }, {
+        },
+        {
             label : 'kilogram',
             value : 'kg'
-        }, {
+        },
+        {
             label : 'gram',
             value : 'g'
         } ];
@@ -151,97 +187,176 @@
         vm.fromMassUnit = vm.massUnits[1]; // default
         vm.toMassUnit = vm.massUnits[2]; // default
 
-        vm.convertMass = function(value, fromUnit, toUnit) {
+        vm.convertMass = function (value, fromUnit, toUnit)
+        {
             $scope.error = '';
             $scope.result = '';
 
-            try {
+            try
+            {
                 utilSvc.isNumber(value);
-                var url = CONST.MASS_UNIT_REST_URL + toUnit +
-                    '?from_unit=' + fromUnit + '&from_value=' + value;
+                var url = CONST.MASS_UNIT_REST_URL + toUnit + '?from_unit=' + fromUnit + '&from_value='
+                        + value;
                 $log.debug('Calling REST URL [' + url + ']');
-                $http
-                    .get(url)
-                    .success(function(data) {
-                        $log.debug('REST call succeeded.');
-                        $scope.result = data.data.from_value + ' ' + fromUnit +
-                            ' = ' + data.data.to_value + ' ' + toUnit;
-                    })
-                    .error(function(data) {
-                        $log.error('REST call failed.');
-                        $scope.error = data.error.message;
-                    });
-            } catch (err) {
-                $log.error('REST call failed.');
-                $scope.error = err.message;
+
+                $http(
+                {
+                    method : 'GET',
+                    url : url
+                }).then(function successCallback(response)
+                {
+                    $log.debug('REST call succeeded.');
+                    if ( response.data && response.data.data )
+                    {
+                        var myData = response.data.data;
+                        $scope.result = myData.from_value + ' ' + fromUnit + ' = '
+                                    + myData.to_value + ' ' + toUnit;
+                    }
+                    else
+                    {
+                        $log.error('response.data.data not found.')
+                    }
+                }, function errorCallback(response)
+                {
+                    $scope.error = 'REST call [' + url + '] failed.';
+                    if ( response.data && response.data.error && response.data.error.message )
+                    {
+                        $scope.error += ' : ' + response.data.error.message;
+                    }
+                    $scope.error += '. status : ' + response.status + '. error : '
+                                            + response.statusText;
+                    $log.error($scope.error);
+                });
             }
-            finally {
-              $log.debug('finally block called.');
+            catch (err)
+            {
+                $scope.error = 'REST call [' + url + '] failed.';
+                if ( err && err.message )
+                {
+                    $scope.error += ' : ' + err.message;
+                }
+                $log.error($scope.error);
+            }
+            finally
+            {
+                $log.debug('finally block called.');
             }
         };
 
         // ------ >>> Temperature <<< -------
 
-        vm.cToF = function(value) {
+        vm.cToF = function (value)
+        {
             $scope.error = '';
             $scope.result = '';
 
-            try {
+            try
+            {
                 utilSvc.isNumber(value);
-                var url = CONST.TEMPERATURE_UNIT_REST_URL +
-                    'degF?from_unit=degC&from_value=' + value;
+                var url = CONST.TEMPERATURE_UNIT_REST_URL + 'degF?from_unit=degC&from_value=' + value;
                 $log.debug('Calling REST URL [' + url + ']');
-                $http
-                    .get(url)
-                    .success(function(data) {
-                        $log.debug('REST call succeeded.');
-                        $scope.result = data.data.from_value + ' &deg;C = ' +
-                            data.data.to_value + ' &deg;F';
-                    })
-                    .error(function(data) {
-                        $log.error('REST call failed.');
-                        $scope.error = data.error.message;
-                    });
-            } catch (err) {
-                $log.error('REST call failed.');
-                $scope.error = err.message;
+
+                $http(
+                {
+                    method : 'GET',
+                    url : url
+                }).then(function successCallback(response)
+                {
+                    $log.debug('REST call succeeded.');
+                    if ( response.data && response.data.data )
+                    {
+                        var myData = response.data.data;
+                        $scope.result = myData.from_value + ' &deg;C = ' + 
+                                    myData.to_value + ' &deg;F';
+                    }
+                    else
+                    {
+                        $log.error('response.data.data not found.')
+                    }
+                }, function errorCallback(response)
+                {
+                    $scope.error = 'REST call [' + url + '] failed.';
+                    if ( response.data && response.data.error && response.data.error.message )
+                    {
+                        $scope.error += ' : ' + response.data.error.message;
+                    }
+                    $scope.error += '. status : ' + response.status + '. error : '
+                                                    + response.statusText;
+                    $log.error($scope.error);
+                });
             }
-            finally {
-              $log.debug('finally block called.');
+            catch (err)
+            {
+                $scope.error = 'REST call [' + url + '] failed.';
+                if ( err && err.message )
+                {
+                    $scope.error += ' : ' + err.message;
+                }
+                $log.error($scope.error);
+            }
+            finally
+            {
+                $log.debug('finally block called.');
             }
         };
 
-        vm.fToC = function(value) {
+        vm.fToC = function (value)
+        {
             $scope.error = '';
             $scope.result = '';
 
-            try {
+            try
+            {
                 utilSvc.isNumber(value);
-                var url = CONST.TEMPERATURE_UNIT_REST_URL +
-                    'degC?from_unit=degF&from_value=' + value;
-                $http
-                    .get(url)
-                    .success(function(data) {
-                        $log.debug('REST call succeeded.');
-                        $scope.result = data.data.from_value + ' &deg;F = ' +
-                            data.data.to_value + ' &deg;C';
-                    })
-                    .error(function(data) {
-                        $log.error('REST call failed.');
-                        $scope.error = data.error.message;
-                    });
-            } catch (err) {
-                $log.error('REST call failed.');
-                $scope.error = err.message;
+                var url = CONST.TEMPERATURE_UNIT_REST_URL + 'degC?from_unit=degF&from_value=' + value;
+
+                $http(
+                {
+                    method : 'GET',
+                    url : url
+                }).then(function successCallback(response)
+                {
+                    $log.debug('REST call succeeded.');
+                    if ( response.data && response.data.data )
+                    {
+                        var myData = response.data.data;
+                        $scope.result = myData.from_value + ' &deg;F = ' 
+                                    + myData.to_value + ' &deg;C';
+                    }
+                    else
+                    {
+                        $log.error('response.data.data not found.')
+                    }
+                }, function errorCallback(response)
+                {
+                    $scope.error = 'REST call [' + url + '] failed.';
+                    if ( response.data && response.data.error && response.data.error.message )
+                    {
+                        $scope.error += ' : ' + response.data.error.message;
+                    }
+                    $scope.error += '. status : ' + response.status + '. error : '
+                                                            + response.statusText;
+                    $log.error($scope.error);
+                });
             }
-            finally {
-              $log.debug('finally block called.');
+            catch (err)
+            {
+                $scope.error = 'REST call [' + url + '] failed.';
+                if ( err && err.message )
+                {
+                    $scope.error += ' : ' + err.message;
+                }
+                $log.error($scope.error);
+            }
+            finally
+            {
+                $log.debug('finally block called.');
             }
         };
 
     }
 
     // annotate the UnitsController with the injectable parameters
-    UnitsController.$inject = ['$timeout', '$log', '$rootScope', '$scope', '$http',
-                               'utilSvc', 'CONST'];
+    UnitsController.$inject =
+    [ '$timeout', '$log', '$rootScope', '$scope', '$http', 'utilSvc', 'CONST' ];
 })();
