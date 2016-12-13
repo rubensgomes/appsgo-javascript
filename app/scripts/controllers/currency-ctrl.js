@@ -121,8 +121,6 @@
             try
             {
                 isCurrency(value);
-                $log.debug('Start spinner key [' + CONST.DEFAULT_SPINNER_ID + ']');
-                utilSvc.startSpinner(CONST.DEFAULT_SPINNER_ID);
                 $log.debug('Calling REST URL [' + url + ']');
 
                 $http(
@@ -158,18 +156,7 @@
             }
             finally
             {
-                $log.debug('Stop spinner on key [' + CONST.DEFAULT_SPINNER_ID + ']');
-                try
-                {
-                    utilSvc.stopSpinner(CONST.DEFAULT_SPINNER_ID);
-                }
-                catch (err)
-                {
-                    if ( err && err.message )
-                    {
-                        $log.error(err.message);
-                    }
-                }
+                $log.debug('Inside finally block');
             }
         };
 
