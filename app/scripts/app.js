@@ -18,8 +18,7 @@
   'use strict';
 
   // create and load the 'app' module
-  var app = angular.module('app', [ 'angularSpinner', 'ngRoute',
-                                    'ngSanitize', 'appRoutes' ]);
+  var app = angular.module('app', [ 'ngRoute', 'ngSanitize', 'appRoutes' ]);
 
   // Define application constants
   /**
@@ -47,7 +46,6 @@
    */
   /* jshint ignore:start */
   app.constant('CONST', {
-    DEFAULT_SPINNER_ID : 'spinner-1',
     MIN_ELEMENT_TEXT_LEN : 1,
     MIN_SEARCH_TEXT_LEN : 3,
     LENGTH_UNIT_REST_URL : 'http://www.rubens-gomes.com/appsgo/restportal/length/',
