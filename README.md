@@ -1,4 +1,6 @@
-# appsgo (AngularJS)
+# Justification for this project
+
+NOTE: This code is not fully tested, and should be considered under development code. The source code that is provided are mainly used for demonostrations and learning purposes only.
 
 appsgo is a mobile web application that provides unit convertion (length, temperature, mass), currency rates, and other utilities (like sensor temperature at Rubens' living room).  This mobile web application was initially developed as a playground for [Rubens](http://www.rubens-gomes.com) to learn more about the Google's "AngularJS" JavaScript framework.
 
